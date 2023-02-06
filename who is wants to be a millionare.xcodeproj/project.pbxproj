@@ -12,6 +12,7 @@
 		751F5B2329901EA3000F8A98 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F5B2229901EA3000F8A98 /* ViewController.swift */; };
 		751F5B2829901EA4000F8A98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 751F5B2729901EA4000F8A98 /* Assets.xcassets */; };
 		751F5B2B29901EA4000F8A98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751F5B2929901EA4000F8A98 /* LaunchScreen.storyboard */; };
+		D0844F4529912A3F008A5A6B /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0844F4429912A3F008A5A6B /* QuestionsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		751F5B2729901EA4000F8A98 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		751F5B2A29901EA4000F8A98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		751F5B2C29901EA4000F8A98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0844F4429912A3F008A5A6B /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				751F5B2229901EA3000F8A98 /* ViewController.swift */,
+				D0844F4429912A3F008A5A6B /* QuestionsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			files = (
 				751F5B2329901EA3000F8A98 /* ViewController.swift in Sources */,
 				751F5B1F29901EA3000F8A98 /* AppDelegate.swift in Sources */,
+				D0844F4529912A3F008A5A6B /* QuestionsViewController.swift in Sources */,
 				751F5B2129901EA3000F8A98 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -299,6 +303,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B7Y7QR66JR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "who is wants to be a millionare/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -326,6 +331,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B7Y7QR66JR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "who is wants to be a millionare/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
