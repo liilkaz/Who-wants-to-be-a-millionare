@@ -20,10 +20,10 @@
 		751F5B2B29901EA4000F8A98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751F5B2929901EA4000F8A98 /* LaunchScreen.storyboard */; };
 		7540356A299264C100F1011A /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75403569299264C100F1011A /* Background.swift */; };
 		7540356C2992652200F1011A /* MainStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7540356B2992652200F1011A /* MainStackView.swift */; };
+		D00A52B62992E22C0084D763 /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00A52B52992E22C0084D763 /* QuestionModel.swift */; };
 		D017EA282992CB8500731EA0 /* QuestionListBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA272992CB8500731EA0 /* QuestionListBrain.swift */; };
 		D017EA2B2992D4D000731EA0 /* BackgroundColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA2A2992D4D000731EA0 /* BackgroundColors.swift */; };
 		D017EA2D2992D50400731EA0 /* QuestionBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA2C2992D50400731EA0 /* QuestionBrain.swift */; };
-		D017EA2F2992D51400731EA0 /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA2E2992D51400731EA0 /* QuestionModel.swift */; };
 		D017EA322992D56300731EA0 /* QuestionBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA312992D56300731EA0 /* QuestionBackground.swift */; };
 		D017EA342992D61C00731EA0 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA332992D61C00731EA0 /* QuestionsViewController.swift */; };
 		D05915F42992C72100AEB917 /* zvuk-chasov.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */; };
@@ -45,10 +45,10 @@
 		751F5B2C29901EA4000F8A98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75403569299264C100F1011A /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		7540356B2992652200F1011A /* MainStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStackView.swift; sourceTree = "<group>"; };
+		D00A52B52992E22C0084D763 /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 		D017EA272992CB8500731EA0 /* QuestionListBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionListBrain.swift; sourceTree = "<group>"; };
 		D017EA2A2992D4D000731EA0 /* BackgroundColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColors.swift; sourceTree = "<group>"; };
 		D017EA2C2992D50400731EA0 /* QuestionBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBrain.swift; sourceTree = "<group>"; };
-		D017EA2E2992D51400731EA0 /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 		D017EA312992D56300731EA0 /* QuestionBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBackground.swift; sourceTree = "<group>"; };
 		D017EA332992D61C00731EA0 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "zvuk-chasov.mp3"; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 			children = (
 				D017EA272992CB8500731EA0 /* QuestionListBrain.swift */,
 				D017EA2C2992D50400731EA0 /* QuestionBrain.swift */,
-				D017EA2E2992D51400731EA0 /* QuestionModel.swift */,
+				D00A52B52992E22C0084D763 /* QuestionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,9 +254,9 @@
 				52C75DDB29928A4C00E80814 /* MoneyStackView.swift in Sources */,
 				52C75DD9299289FE00E80814 /* QuestionStackView.swift in Sources */,
 				52C75DDF29928C1600E80814 /* PromtStackView.swift in Sources */,
-				D017EA2F2992D51400731EA0 /* QuestionModel.swift in Sources */,
 				751F5B1F29901EA3000F8A98 /* AppDelegate.swift in Sources */,
 				751F5B2129901EA3000F8A98 /* SceneDelegate.swift in Sources */,
+				D00A52B62992E22C0084D763 /* QuestionModel.swift in Sources */,
 				52C75DD7299289A400E80814 /* GeneralStackView.swift in Sources */,
 				7540356A299264C100F1011A /* Background.swift in Sources */,
 				D017EA2B2992D4D000731EA0 /* BackgroundColors.swift in Sources */,
