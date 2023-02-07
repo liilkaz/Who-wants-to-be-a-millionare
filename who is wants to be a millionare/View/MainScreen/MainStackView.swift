@@ -47,6 +47,8 @@ class MainStackView: UIStackView {
         button.setTitle("Начало игры", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 25)
         button.setTitleColor( .green, for: .normal)
+        button.addTarget(nil, action: #selector(ViewController.buttonStartGamePressed), for: .touchUpInside)
+        
         return button
     }()
     
