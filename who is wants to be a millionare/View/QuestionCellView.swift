@@ -10,10 +10,10 @@ import UIKit
 class QuestionCellView: UITableViewCell {
     
     static let identifier = "questionCellView"
+    private var questionCellBrain = QuestionCellBrain()
     
     lazy var backgroundImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "purple")
         image.contentMode = .scaleAspectFill
         
         return image
@@ -58,7 +58,7 @@ class QuestionCellView: UITableViewCell {
         NSLayoutConstraint.activate([
             backgroundImage.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 40),
             backgroundImage.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -40),
-            backgroundImage.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -6),
+            backgroundImage.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -5),
             
             questionNumberLabel.leftAnchor.constraint(equalTo: backgroundImage.leftAnchor, constant: 5),
             questionNumberLabel.centerYAnchor.constraint(equalTo: backgroundImage.centerYAnchor),
@@ -76,12 +76,7 @@ class QuestionCellView: UITableViewCell {
     
     func configure(money: Int, numberOfQuestion: Int) {
         
-        if numberOfQuestion == 5 || numberOfQuestion == 10 {
-            backgroundImage.image = UIImage(named: "blue")
-        } else if numberOfQuestion == 15 {
-            backgroundImage.image = UIImage(named: "blue")
-        }
-        
+        backgroundImage.image = UIImage(named: questionCellBrain.checkQuestionNumber(questionNumber: numberOfQuestion).rawValue)
         questionNumberLabel.text = "Вопрос \(numberOfQuestion)"
         moneyLabel.text = "\(money) ₽"
         

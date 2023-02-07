@@ -15,6 +15,7 @@
 		D0844F4529912A3F008A5A6B /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0844F4429912A3F008A5A6B /* QuestionsViewController.swift */; };
 		D0844F4729915CEC008A5A6B /* QuestionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0844F4629915CEC008A5A6B /* QuestionCellView.swift */; };
 		D0D7801B2991DE0E0024146A /* QuestionListBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7801A2991DE0E0024146A /* QuestionListBrain.swift */; };
+		D0D7801D2991EA5A0024146A /* QuestionCellBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7801C2991EA5A0024146A /* QuestionCellBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		D0844F4429912A3F008A5A6B /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		D0844F4629915CEC008A5A6B /* QuestionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCellView.swift; sourceTree = "<group>"; };
 		D0D7801A2991DE0E0024146A /* QuestionListBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuestionListBrain.swift; path = "who is wants to be a millionare/View/QuestionListBrain.swift"; sourceTree = SOURCE_ROOT; };
+		D0D7801C2991EA5A0024146A /* QuestionCellBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuestionCellBrain.swift; path = "who is wants to be a millionare/View/QuestionCellBrain.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				D0D7801A2991DE0E0024146A /* QuestionListBrain.swift */,
+				D0D7801C2991EA5A0024146A /* QuestionCellBrain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			files = (
 				751F5B2329901EA3000F8A98 /* ViewController.swift in Sources */,
 				751F5B1F29901EA3000F8A98 /* AppDelegate.swift in Sources */,
+				D0D7801D2991EA5A0024146A /* QuestionCellBrain.swift in Sources */,
 				D0D7801B2991DE0E0024146A /* QuestionListBrain.swift in Sources */,
 				D0844F4529912A3F008A5A6B /* QuestionsViewController.swift in Sources */,
 				D0844F4729915CEC008A5A6B /* QuestionCellView.swift in Sources */,

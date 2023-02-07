@@ -51,10 +51,10 @@ class QuestionsViewController: UIViewController {
     
 }
 
-// MARK: - Adding view controller methods
+// MARK: - Adding QuestionsViewController methods
 
 extension QuestionsViewController {
-
+    
     private func viewUpdate() {
         view.addSubview(backgroundImage)
         view.addSubview(stackView)
@@ -73,14 +73,13 @@ extension QuestionsViewController {
             backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
-            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
+            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
             
             logoImage.topAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.topAnchor),
-            logoImage.heightAnchor.constraint(equalToConstant: 90),
-            logoImage.widthAnchor.constraint(equalToConstant: 90),
+            logoImage.heightAnchor.constraint(equalToConstant: view.bounds.height / 10),
             
         ])
     }
@@ -98,7 +97,7 @@ extension QuestionsViewController: UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: QuestionCellView.identifier) as? QuestionCellView else { fatalError() }
         cell.configure(money: questionsBrain.questionsList[indexPath.row],
-                       numberOfQuestion: questionsBrain.getQuestionNumber())
+                       numberOfQuestion: questionsBrain.number[indexPath.row])
         return cell
     }
     
