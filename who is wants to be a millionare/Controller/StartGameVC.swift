@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import AVFoundation
 
 class StartGameVC: UIViewController {
-
+    
     // mainStackView
     let mainStackView: GeneralStackView = {
         let stack = GeneralStackView(frame: .zero)
@@ -19,19 +20,64 @@ class StartGameVC: UIViewController {
         return Background(frame: .zero)
     }()
     
+    // AudioPlayer
+    var player: AVAudioPlayer?
+    
+    // Timer
+    var timer: Timer?
+    
+    private var count = 30
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addAllSubview()
         settingConstraints()
+        startTimer()
         
+    }
+    
+    private func startTimer() {
+        
+        playSound("zvuk-chasov")
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(update), userInfo: nil, repeats: true)
+        
+    }
+    
+    @objc func update() {
+        
+        if count > 0 {
+            count -= 1
+            mainStackView.setTextForCountLabel(text: count.description)
+        } else {
+            if let timer = timer {
+                timer.invalidate()
+                mainStackView.setTextForCountLabel(text: "")
+            }
+        }
+    }
+    
+    func playSound(_ soundName: String) {
+        
+        guard let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") else { return }
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            
+            guard let player = player else { return }
+            
+            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     @objc func buttonAnswer(sender: UIButton) {
         
         guard let title = sender.titleLabel, let text = title.text else { return }
         print(text)
-    
+        
     }
     
     @objc func promtButton(sender: UIButton) {
@@ -65,5 +111,5 @@ class StartGameVC: UIViewController {
             mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-
+    
 }

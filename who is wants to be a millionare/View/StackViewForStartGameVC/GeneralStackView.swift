@@ -48,6 +48,11 @@ class GeneralStackView: UIStackView {
         addArrangedSubview(promtStackView)
     }
     
+    func setTextForCountLabel(text: String) {
+        
+        moneyStackView.setTextForCountLabel(text: text)
+    }
+    
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
