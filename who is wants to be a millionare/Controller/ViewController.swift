@@ -42,7 +42,11 @@ class ViewController: UIViewController {
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
-
-
+    
+    let startGameVC = StartGameVC()
+    
+    @objc func buttonStartGamePressed(sender: UIButton){
+        self.present(startGameVC, animated: true)
+    }
 }
 
