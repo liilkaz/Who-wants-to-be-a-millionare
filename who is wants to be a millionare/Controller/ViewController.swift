@@ -43,9 +43,10 @@ class ViewController: UIViewController {
         ])
     }
     
-    let startGameVC = StartGameVC()
-    
     @objc func buttonStartGamePressed(sender: UIButton){
+        
+        let startGameVC = StartGameVC()
+        startGameVC.modalPresentationStyle = .fullScreen
         self.present(startGameVC, animated: true)
     }
 }
