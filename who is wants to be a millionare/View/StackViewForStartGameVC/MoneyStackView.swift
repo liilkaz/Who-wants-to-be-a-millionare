@@ -9,21 +9,16 @@ import UIKit
 
 class MoneyStackView: UIStackView {
 
-    let moneyCountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Question 1"
-        label.textColor = .white
-        label.font = .systemFont(ofSize: 20)
-        return label
+    lazy var moneyCountLabel: UILabel = {
+        return settingLabel(text: "Question 1", size: 20, alignment: .left)
     }()
     
-    let questionCountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "USD"
-        label.textAlignment = .right
-        label.textColor = .white
-        label.font = .systemFont(ofSize: 20)
-        return label
+    lazy var timerCountLabel: UILabel = {
+        return settingLabel(text: "30", size: 70, alignment: .center)
+    }()
+    
+    lazy var questionCountLabel: UILabel = {
+        return settingLabel(text: "USD", size: 20, alignment: .right)
     }()
     
     override init(frame: CGRect) {
@@ -40,7 +35,23 @@ class MoneyStackView: UIStackView {
     private func addArrangedAllSubview() {
         
         addArrangedSubview(moneyCountLabel)
+        addArrangedSubview(timerCountLabel)
         addArrangedSubview(questionCountLabel)
+    }
+    
+    func settingLabel(text: String, size: CGFloat, alignment: NSTextAlignment) -> UILabel {
+        
+        let label = UILabel()
+        label.text = text
+        label.textAlignment = alignment
+        label.textColor = .white
+        label.font = .systemFont(ofSize: size)
+        return label
+        
+    }
+    
+    func setTextForCountLabel(text: String) {
+        timerCountLabel.text = text
     }
     
     required init(coder: NSCoder) {
