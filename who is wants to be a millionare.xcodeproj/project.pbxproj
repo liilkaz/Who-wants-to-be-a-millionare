@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		525F32552992868F0012B9B9 /* StartGameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525F32542992868F0012B9B9 /* StartGameVC.swift */; };
-		526DAAA82992AF7B00F48172 /* zvuk-chasov.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 526DAAA72992AF7B00F48172 /* zvuk-chasov.mp3 */; };
 		52C75DD7299289A400E80814 /* GeneralStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C75DD6299289A400E80814 /* GeneralStackView.swift */; };
 		52C75DD9299289FE00E80814 /* QuestionStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C75DD8299289FE00E80814 /* QuestionStackView.swift */; };
 		52C75DDB29928A4C00E80814 /* MoneyStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C75DDA29928A4C00E80814 /* MoneyStackView.swift */; };
@@ -21,11 +20,11 @@
 		751F5B2B29901EA4000F8A98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751F5B2929901EA4000F8A98 /* LaunchScreen.storyboard */; };
 		7540356A299264C100F1011A /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75403569299264C100F1011A /* Background.swift */; };
 		7540356C2992652200F1011A /* MainStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7540356B2992652200F1011A /* MainStackView.swift */; };
+		D05915F42992C72100AEB917 /* zvuk-chasov.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		525F32542992868F0012B9B9 /* StartGameVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartGameVC.swift; sourceTree = "<group>"; };
-		526DAAA72992AF7B00F48172 /* zvuk-chasov.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "zvuk-chasov.mp3"; path = "../../../../../Downloads/zvuk-chasov.mp3"; sourceTree = "<group>"; };
 		52C75DD6299289A400E80814 /* GeneralStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralStackView.swift; sourceTree = "<group>"; };
 		52C75DD8299289FE00E80814 /* QuestionStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStackView.swift; sourceTree = "<group>"; };
 		52C75DDA29928A4C00E80814 /* MoneyStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyStackView.swift; sourceTree = "<group>"; };
@@ -40,6 +39,7 @@
 		751F5B2C29901EA4000F8A98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75403569299264C100F1011A /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		7540356B2992652200F1011A /* MainStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStackView.swift; sourceTree = "<group>"; };
+		D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "zvuk-chasov.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,7 @@
 		526DAAA62992AF4100F48172 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
-				526DAAA72992AF7B00F48172 /* zvuk-chasov.mp3 */,
+				D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */,
 			);
 			path = Sound;
 			sourceTree = "<group>";
@@ -199,7 +199,7 @@
 			files = (
 				751F5B2B29901EA4000F8A98 /* LaunchScreen.storyboard in Resources */,
 				751F5B2829901EA4000F8A98 /* Assets.xcassets in Resources */,
-				526DAAA82992AF7B00F48172 /* zvuk-chasov.mp3 in Resources */,
+				D05915F42992C72100AEB917 /* zvuk-chasov.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
