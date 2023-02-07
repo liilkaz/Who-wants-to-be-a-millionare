@@ -9,7 +9,16 @@ import UIKit
 
 class QuestionsViewController: UIViewController {
     
-    private let tableView = UITableView()
+    private var questionsBrain = QuestionListBrain()
+    
+    private let tableView: UITableView = {
+        let table = UITableView()
+        table.register(QuestionCellView.self, forCellReuseIdentifier: QuestionCellView.identifier)
+        table.backgroundColor = .clear
+        table.isUserInteractionEnabled = false
+        
+        return table
+    }()
     
     private let backgroundImage: UIImageView = {
         let image = UIImageView()
@@ -22,6 +31,7 @@ class QuestionsViewController: UIViewController {
     private let logoImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "image1")
+        image.contentMode = .scaleAspectFit
         
         return image
     }()
@@ -32,29 +42,30 @@ class QuestionsViewController: UIViewController {
         stack.spacing = 10
         return stack
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         viewUpdate()
     }
     
-    // MARK: - Private functions
-    
+}
+
+// MARK: - Adding view controller methods
+
+extension QuestionsViewController {
+
     private func viewUpdate() {
         view.addSubview(backgroundImage)
-        view.addSubview(logoImage)
-        view.addSubview(tableView)
+        view.addSubview(stackView)
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
         setupConstraints()
     }
     
     private func setupConstraints() {
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         logoImage.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             backgroundImage.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -62,32 +73,33 @@ class QuestionsViewController: UIViewController {
             backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
+            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
+            
+            logoImage.topAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.topAnchor),
             logoImage.heightAnchor.constraint(equalToConstant: 90),
             logoImage.widthAnchor.constraint(equalToConstant: 90),
             
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
         ])
     }
-    
 }
 
+// MARK: - Adding TableView DataSource
 
 extension QuestionsViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return questionsBrain.getQuestionsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else { fatalError() }
-        cell.textLabel?.text = "Question"
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: QuestionCellView.identifier) as? QuestionCellView else { fatalError() }
+        cell.configure(money: questionsBrain.questionsList[indexPath.row],
+                       numberOfQuestion: questionsBrain.getQuestionNumber())
         return cell
     }
-    
     
 }

@@ -13,6 +13,8 @@
 		751F5B2829901EA4000F8A98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 751F5B2729901EA4000F8A98 /* Assets.xcassets */; };
 		751F5B2B29901EA4000F8A98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751F5B2929901EA4000F8A98 /* LaunchScreen.storyboard */; };
 		D0844F4529912A3F008A5A6B /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0844F4429912A3F008A5A6B /* QuestionsViewController.swift */; };
+		D0844F4729915CEC008A5A6B /* QuestionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0844F4629915CEC008A5A6B /* QuestionCellView.swift */; };
+		D0D7801B2991DE0E0024146A /* QuestionListBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D7801A2991DE0E0024146A /* QuestionListBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		751F5B2A29901EA4000F8A98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		751F5B2C29901EA4000F8A98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0844F4429912A3F008A5A6B /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
+		D0844F4629915CEC008A5A6B /* QuestionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCellView.swift; sourceTree = "<group>"; };
+		D0D7801A2991DE0E0024146A /* QuestionListBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuestionListBrain.swift; path = "who is wants to be a millionare/View/QuestionListBrain.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				751F5B2929901EA4000F8A98 /* LaunchScreen.storyboard */,
+				D0844F4629915CEC008A5A6B /* QuestionCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -87,6 +92,7 @@
 		751F5B3429901F09000F8A98 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D0D7801A2991DE0E0024146A /* QuestionListBrain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -163,7 +169,9 @@
 			files = (
 				751F5B2329901EA3000F8A98 /* ViewController.swift in Sources */,
 				751F5B1F29901EA3000F8A98 /* AppDelegate.swift in Sources */,
+				D0D7801B2991DE0E0024146A /* QuestionListBrain.swift in Sources */,
 				D0844F4529912A3F008A5A6B /* QuestionsViewController.swift in Sources */,
+				D0844F4729915CEC008A5A6B /* QuestionCellView.swift in Sources */,
 				751F5B2129901EA3000F8A98 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
