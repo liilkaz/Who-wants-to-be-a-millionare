@@ -10,7 +10,7 @@ import UIKit
 class MoneyStackView: UIStackView {
 
     lazy var moneyCountLabel: UILabel = {
-        return settingLabel(text: "Question 1", size: 20, alignment: .left)
+        return settingLabel(text: "RUB", size: 20, alignment: .right)
     }()
     
     lazy var timerCountLabel: UILabel = {
@@ -18,7 +18,7 @@ class MoneyStackView: UIStackView {
     }()
     
     lazy var questionCountLabel: UILabel = {
-        return settingLabel(text: "USD", size: 20, alignment: .right)
+        return settingLabel(text: "", size: 20, alignment: .left)
     }()
     
     override init(frame: CGRect) {
@@ -34,9 +34,9 @@ class MoneyStackView: UIStackView {
     // MARK: addArrangedAllSubview
     private func addArrangedAllSubview() {
         
-        addArrangedSubview(moneyCountLabel)
-        addArrangedSubview(timerCountLabel)
         addArrangedSubview(questionCountLabel)
+        addArrangedSubview(timerCountLabel)
+        addArrangedSubview(moneyCountLabel)
     }
     
     func settingLabel(text: String, size: CGFloat, alignment: NSTextAlignment) -> UILabel {
