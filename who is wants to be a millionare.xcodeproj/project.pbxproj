@@ -20,6 +20,7 @@
 		751F5B2B29901EA4000F8A98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 751F5B2929901EA4000F8A98 /* LaunchScreen.storyboard */; };
 		7540356A299264C100F1011A /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75403569299264C100F1011A /* Background.swift */; };
 		7540356C2992652200F1011A /* MainStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7540356B2992652200F1011A /* MainStackView.swift */; };
+		761707132992CF3100CD58FC /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761707122992CF3100CD58FC /* RulesView.swift */; };
 		D05915F42992C72100AEB917 /* zvuk-chasov.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		751F5B2C29901EA4000F8A98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75403569299264C100F1011A /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		7540356B2992652200F1011A /* MainStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStackView.swift; sourceTree = "<group>"; };
+		761707122992CF3100CD58FC /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
 		D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "zvuk-chasov.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +118,7 @@
 		751F5B3329901EFA000F8A98 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7617070B2992CE0C00CD58FC /* Rules */,
 				7540356D2992652700F1011A /* MainScreen */,
 				525F3253299286240012B9B9 /* StackViewForStartGameVC */,
 				751F5B2929901EA4000F8A98 /* LaunchScreen.storyboard */,
@@ -137,6 +140,14 @@
 				7540356B2992652200F1011A /* MainStackView.swift */,
 			);
 			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		7617070B2992CE0C00CD58FC /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				761707122992CF3100CD58FC /* RulesView.swift */,
+			);
+			path = Rules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +229,7 @@
 				52C75DD9299289FE00E80814 /* QuestionStackView.swift in Sources */,
 				52C75DDF29928C1600E80814 /* PromtStackView.swift in Sources */,
 				751F5B1F29901EA3000F8A98 /* AppDelegate.swift in Sources */,
+				761707132992CF3100CD58FC /* RulesView.swift in Sources */,
 				751F5B2129901EA3000F8A98 /* SceneDelegate.swift in Sources */,
 				52C75DD7299289A400E80814 /* GeneralStackView.swift in Sources */,
 				7540356A299264C100F1011A /* Background.swift in Sources */,
