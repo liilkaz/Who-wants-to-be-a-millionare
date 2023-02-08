@@ -40,47 +40,74 @@ class StartGameVC: UIViewController {
         
     }
     
+    @objc func promtButton(sender: UIButton) {
+        
+        switch sender.tag {
+            
+        case 1:
+            promtFiftyFifty(sender: sender)
+        case 2:
+            print("Two")
+        case 3:
+            print("Three")
+            
+        default:
+            print("Error")
+        }
+    }
+    
+    // MARK: FIFTY FIFTY PROMT BUTTON
+    func promtFiftyFifty(sender: UIButton) {
+        
+        let question = questionBrain.getfiftyFiftyArray()
+        setTitleButton(textButton: question)
+        sender.setBackgroundImage(UIImage(named: "button1Used"), for: .normal)
+        sender.isEnabled = false
+        
+    }
+    
     // MARK: BUTTON TAPPED
     @objc func buttonAnswer(sender: UIButton) {
-        count = 30
+        
+        self.count = 30
         
         guard let title = sender.titleLabel, let userAnswer = title.text else { return }
-        let userGotItRight = questionBrain.checkAnswer(answer: userAnswer)
         
-        if userGotItRight {
-            if #available(iOS 15.0, *) {
-                sender.configuration?.background.image = UIImage(named: "green")
+        if userAnswer != " " {
+            let userGotItRight = questionBrain.checkAnswer(answer: userAnswer)
+            
+            if userGotItRight {
+                if #available(iOS 15.0, *) {
+                    sender.configuration?.background.image = UIImage(named: "green")
+                } else {
+                    sender.setBackgroundImage(UIImage(named: "green"), for: .normal)
+                }
             } else {
-                sender.setBackgroundImage(UIImage(named: "green"), for: .normal)
+                if #available(iOS 15.0, *) {
+                    sender.configuration?.background.image = UIImage(named: "red")
+                } else {
+                    sender.setBackgroundImage(UIImage(named: "red"), for: .normal)
+                }
             }
-        } else {
-            if #available(iOS 15.0, *) {
-                sender.configuration?.background.image = UIImage(named: "red")
-            } else {
-                sender.setBackgroundImage(UIImage(named: "red"), for: .normal)
-            }
+            
+            questionBrain.nextQuestion()
+            
+            timer?.invalidate()
+            startTimer()
+            
+            Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
         }
         
-        questionBrain.nextQuestion()
-        
-        timer?.invalidate()
-        startTimer()
-        
-        Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
-        
-
     }
     
     @objc func updateUI() {
         
+        let textButton = questionBrain.getQuestionTextButton()
         mainStackView.questionStackView.questionLabel.text = questionBrain.getQuestionText()
         mainStackView.moneyStackView.questionCountLabel.text = "Question \(questionBrain.questionNumber + 1)"
         mainStackView.moneyStackView.moneyCountLabel.text = "\(questionBrain.getMoney()) RUB"
-        let textButton = questionBrain.getQuestionTextButton()
-        mainStackView.answerStackView.buttonOne.setTitle(textButton[0], for: .normal)
-        mainStackView.answerStackView.buttonTwo.setTitle(textButton[1], for: .normal)
-        mainStackView.answerStackView.buttonThree.setTitle(textButton[2], for: .normal)
-        mainStackView.answerStackView.buttonFour.setTitle(textButton[3], for: .normal)
+        
+        setTitleButton(textButton: textButton)
         
         if #available(iOS 15.0, *) {
             mainStackView.answerStackView.buttonOne.configuration?.background.image = UIImage(named: "blue")
@@ -94,7 +121,16 @@ class StartGameVC: UIViewController {
             mainStackView.answerStackView.buttonFour.setBackgroundImage(UIImage(named: "blue"), for: .normal)
         }
         
+    }
+    
+    // For Button Set Title
+    
+    func setTitleButton(textButton: [String]) {
         
+        mainStackView.answerStackView.buttonOne.setTitle(textButton[0], for: .normal)
+        mainStackView.answerStackView.buttonTwo.setTitle(textButton[1], for: .normal)
+        mainStackView.answerStackView.buttonThree.setTitle(textButton[2], for: .normal)
+        mainStackView.answerStackView.buttonFour.setTitle(textButton[3], for: .normal)
     }
     
     // MARK: START TIMER
@@ -135,11 +171,6 @@ class StartGameVC: UIViewController {
         } catch let error {
             print(error.localizedDescription)
         }
-    }
-    
-    @objc func promtButton(sender: UIButton) {
-        
-        print(sender.tag)
     }
     
     // MARK: addAllSubview
