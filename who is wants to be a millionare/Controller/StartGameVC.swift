@@ -102,20 +102,18 @@ class StartGameVC: UIViewController {
                             self.correctAnswerTapped(button: sender)
                         }
                     }
-                    
+                    self.checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
                 }
                 
             }
         }
-        
     }
     
     private func correctAnswerTapped(button: UIButton) {
-        self.dismiss(animated: true)
-        self.checkVersion(button: button, color: BackgroundColors.blue.rawValue)
         self.questionBrain.nextQuestion()
         self.timer?.invalidate()
         self.startTimer()
+        self.dismiss(animated: true)
         
         Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.updateUI), userInfo: nil, repeats: false)
     }
