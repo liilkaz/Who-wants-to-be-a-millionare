@@ -75,7 +75,7 @@ extension QuestionsViewController {
             question.moneyLabel.text = "\(questionListBrain.moneyList[index]) ₽"
             
             
-            // MARK: - Переход на экран проигрыша
+            // MARK: - Переход на экран проигрыша/выигрыша
             //            if trueOrFalse == false {
             //                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             //                    let loseVC = LoseViewController()

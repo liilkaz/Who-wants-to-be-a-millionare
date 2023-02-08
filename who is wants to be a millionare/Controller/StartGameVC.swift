@@ -10,23 +10,23 @@ import AVFoundation
 
 class StartGameVC: UIViewController {
     
-    var questionBrain = QuestionBrain()
+    private var questionBrain = QuestionBrain()
     
     // mainStackView
-    let mainStackView: GeneralStackView = {
+    private let mainStackView: GeneralStackView = {
         let stack = GeneralStackView(frame: .zero)
         return stack
     }()
     // BackgroundView
-    let backgroundView: Background = {
+    private let backgroundView: Background = {
         return Background(frame: .zero)
     }()
     
     // AudioPlayer
-    var player: AVAudioPlayer?
+    private var player: AVAudioPlayer?
     
     // Timer
-    var timer: Timer?
+    private var timer: Timer?
     
     private var count = 30
     
@@ -57,9 +57,9 @@ class StartGameVC: UIViewController {
     }
     
     // MARK: FIFTY FIFTY PROMT BUTTON
-    func promtFiftyFifty(sender: UIButton) {
+    private func promtFiftyFifty(sender: UIButton) {
         
-        let question = questionBrain.getfiftyFiftyArray()
+        let question = questionBrain.getFiftyFiftyArray()
         setTitleButton(textButton: question)
         sender.setBackgroundImage(UIImage(named: "button1Used"), for: .normal)
         sender.isEnabled = false
@@ -69,43 +69,71 @@ class StartGameVC: UIViewController {
     // MARK: BUTTON TAPPED
     @objc func buttonAnswer(sender: UIButton) {
         
-        self.count = 30
+        guard let title = sender.titleLabel,
+              let answerUser = title.text else { return }
         
-        guard let title = sender.titleLabel, let userAnswer = title.text else { return }
+        let vc = QuestionsViewController()
+        vc.modalPresentationStyle = .fullScreen
         
-        if userAnswer != " " {
-            let userGotItRight = questionBrain.checkAnswer(answer: userAnswer)
+        // MARK: Проверка на пустую кнопку
+        if answerUser != " " {
             
-            if userGotItRight {
-                if #available(iOS 15.0, *) {
-                    sender.configuration?.background.image = UIImage(named: "green")
-                } else {
-                    sender.setBackgroundImage(UIImage(named: "green"), for: .normal)
-                }
-            } else {
-                if #available(iOS 15.0, *) {
-                    sender.configuration?.background.image = UIImage(named: "red")
-                } else {
-                    sender.setBackgroundImage(UIImage(named: "red"), for: .normal)
-                }
-            }
-            
-            questionBrain.nextQuestion()
-            
+            self.count = 30
+            player?.stop()
             timer?.invalidate()
-            startTimer()
             
-            Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
+            vc.currentQuestion = questionBrain.questionNumber + 1
+            checkVersion(button: sender, color: BackgroundColors.yellow.rawValue)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
+                if questionBrain.checkAnswer(answer: answerUser) {
+                    vc.trueOrFalse = true
+                    checkVersion(button: sender, color: BackgroundColors.green.rawValue)
+                } else {
+                    vc.trueOrFalse = false
+                    checkVersion(button: sender, color: BackgroundColors.red.rawValue)
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.present(vc, animated: true)
+                    
+                    if vc.trueOrFalse {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            self.correctAnswerTapped(button: sender)
+                        }
+                    }
+                    
+                }
+                
+            }
         }
         
     }
     
-    @objc func updateUI() {
+    private func correctAnswerTapped(button: UIButton) {
+        self.dismiss(animated: true)
+        self.checkVersion(button: button, color: BackgroundColors.blue.rawValue)
+        self.questionBrain.nextQuestion()
+        self.timer?.invalidate()
+        self.startTimer()
+        
+        Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.updateUI), userInfo: nil, repeats: false)
+    }
+    
+    private func checkVersion(button: UIButton, color: String) {
+        if #available(iOS 15.0, *) {
+            button.configuration?.background.image = UIImage(named: color)
+        } else {
+            button.setBackgroundImage(UIImage(named: color), for: .normal)
+        }
+    }
+    
+    @objc private func updateUI() {
         
         let textButton = questionBrain.getQuestionTextButton()
         mainStackView.questionStackView.questionLabel.text = questionBrain.getQuestionText()
-        mainStackView.moneyStackView.questionCountLabel.text = "Question \(questionBrain.questionNumber + 1)"
-        mainStackView.moneyStackView.moneyCountLabel.text = "\(questionBrain.getMoney()) RUB"
+        mainStackView.moneyStackView.questionCountLabel.text = "Вопрос \(questionBrain.questionNumber + 1)"
+        mainStackView.moneyStackView.moneyCountLabel.text = "\(questionBrain.getMoney()) ₽"
         
         setTitleButton(textButton: textButton)
         
@@ -125,7 +153,7 @@ class StartGameVC: UIViewController {
     
     // For Button Set Title
     
-    func setTitleButton(textButton: [String]) {
+    private func setTitleButton(textButton: [String]) {
         
         mainStackView.answerStackView.buttonOne.setTitle(textButton[0], for: .normal)
         mainStackView.answerStackView.buttonTwo.setTitle(textButton[1], for: .normal)
@@ -142,7 +170,7 @@ class StartGameVC: UIViewController {
         
     }
     
-    @objc func updateTimer() {
+    @objc private func updateTimer() {
         
         if count > 0 {
             count -= 1
@@ -157,7 +185,7 @@ class StartGameVC: UIViewController {
     }
     
     // MARK: PlAY SOUND
-    func playSound(_ soundName: String) {
+    private func playSound(_ soundName: String) {
         
         guard let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") else { return }
         
@@ -201,3 +229,4 @@ class StartGameVC: UIViewController {
     }
     
 }
+
