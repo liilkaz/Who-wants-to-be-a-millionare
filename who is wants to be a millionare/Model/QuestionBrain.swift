@@ -76,19 +76,17 @@ struct QuestionBrain {
         
         return text
     }
-
+    
     func getFiftyFiftyArray() -> [String] {
-
+        
         let currentQuestion = questions[questionNumber]
         var uncorrectAnswers = [String]()
         var array = [String]()
         
-        for item in currentQuestion.answers {
-            if item != currentQuestion.correctAnswer {
-                uncorrectAnswers.append(item)
-            }
+        for item in currentQuestion.answers where item != currentQuestion.correctAnswer {
+            uncorrectAnswers.append(item)
         }
-  
+        
         guard let randomUncorrectAnswer = uncorrectAnswers.randomElement() else { fatalError() }
         
         for item in currentQuestion.answers {
