@@ -1,5 +1,5 @@
 //
-//  RulesView.swift
+//  RulesViewController.swift
 //  who is wants to be a millionare
 //
 //  Created by Magomadov on 09.02.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RulesController: UIViewController {
+class RulesViewController: UIViewController {
     
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -18,11 +18,9 @@ class RulesController: UIViewController {
     
     private lazy var textView: UITextView = {
         let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 18)
+        textView.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         textView.backgroundColor = .clear
         textView.text = """
-    Правила игры
-
     Вы должны правильно ответить на ряд вопросов с несколькими вариантами ответов, чтобы перейти на следующий уровень. Всего 15 вопросов, каждый вопрос стоит определенной суммы денег, нет никаких временных ограничений для предоставления ответа (для ответа на каждый вопрос дается 30 секунд). Также Вы получаете три вида подсказок, если Вы застряли на конкретном вопросе.
     Вопросы “Кто хочет стать миллионером?” структурированы в соответствии с пятью различными уровнями, причем уровень сложности постепенно увеличивается. Каждый уровень содержит пять вопросов. Вопросы, сгруппированные на одном уровне, будут иметь одинаковую сложность.
     Важно помнить, что вопросы, составляющие каждый уровень, не обязательно будут относиться к одним и тем же или даже сходным темам, но их общий уровень сложности будет одинаковым. Немаловажно, что уровни вопросов не следует путать с «несгораемыми суммами» или структурой ценностей вопросов, что они собой являют объясняется ниже.
@@ -54,24 +52,31 @@ class RulesController: UIViewController {
         return textView
     }()
     
-
+    // Добавляю тайтл и бар айтем. Также метод рулесДисмисс
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Правила игры"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад",
+                                                           style: .plain,
+                                                           target: self, action:
+                                                            #selector(rulesDismiss))
         
         view.addSubview(imageView)
         view.addSubview(textView)
         
         setupViewsConstraints()
     }
-    func rulesText () {
-        
-    }
     
+    @objc private func rulesDismiss() {
+        dismiss(animated: true)
+    }
+    // конец редакции
 }
 
 
 //MARK: - Setup Views
-extension RulesController {
+extension RulesViewController {
     private func setupViewsConstraints() {
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
