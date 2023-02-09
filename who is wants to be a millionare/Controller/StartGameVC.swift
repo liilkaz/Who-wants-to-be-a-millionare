@@ -35,7 +35,7 @@ class StartGameVC: UIViewController {
         
         addAllSubview()
         settingConstraints()
-        startTimer()
+//        startTimer()
         updateUI()
         generalStackView.promtStackView.promtFour.isEnabled = false
         
@@ -58,7 +58,7 @@ extension StartGameVC {
         case 1:
             promtFiftyFifty(sender: sender)
         case 2:
-            print("Two")
+            askTheAudience()
         case 3:
             print("Three")
         case 4:
@@ -66,6 +66,32 @@ extension StartGameVC {
         default:
             print("Error")
         }
+    }
+    
+    private func askTheAudience() {
+       
+        let view = ViewAsk(frame: .zero)
+        self.view.addSubview(view)
+        setConstraintsForAskView(askView: view)
+        
+        let arrayAsk = questionBrain.askTheAudienceResult()
+        view.labelA.text = arrayAsk[0].description + "%"
+        view.labelB.text = arrayAsk[1].description + "%"
+        view.labelC.text = arrayAsk[2].description + "%"
+        view.labelD.text = arrayAsk[3].description + "%"
+        
+
+    }
+    
+    func setConstraintsForAskView(askView: UIView) {
+        
+        NSLayoutConstraint.activate([
+            askView.heightAnchor.constraint(equalToConstant: 300),
+            askView.widthAnchor.constraint(equalToConstant: 300),
+            askView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            askView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+        
     }
     
     private func takeMoney() {

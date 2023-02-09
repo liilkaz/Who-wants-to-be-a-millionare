@@ -65,6 +65,53 @@ struct QuestionBrain {
         }
     }
     
+    func askTheAudienceResult() -> [Int] {
+        
+        let currentQuestion = questions[questionNumber]
+        
+        var indexCorrectAnswer = 0
+        
+        for i in 0...currentQuestion.answers.count - 1 {
+            
+            if currentQuestion.answers[i] == currentQuestion.correctAnswer {
+                
+                indexCorrectAnswer = i
+            }
+            
+        }
+
+        var a = 0
+        var b = 0
+        var c = 0
+        var d = 0
+
+        for _ in 1...100 {
+            
+            func randomPercent() -> Double {
+                return Double(arc4random() % 1000) / 10.0;
+            }
+            
+            let randomNumber = randomPercent()
+            switch(randomNumber) {
+            case 0..<70:
+                a += 1
+            case 70..<80:
+                b += 1
+            case 80..<90:
+                c += 1
+            case 90..<100:
+                d += 1
+            default:
+                break
+            }
+        }
+        
+        var array = [b, c, d]
+        array.insert(a, at: indexCorrectAnswer)
+        
+        return array
+    }
+    
     func getMoney() -> Int {
         let money = moneyList[questionNumber]
         return money

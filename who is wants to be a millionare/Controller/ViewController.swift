@@ -55,7 +55,8 @@ class ViewController: UIViewController {
         let rulesController = RulesViewController()
         
         let navVC = UINavigationController(rootViewController: rulesController)
-        navVC.modalPresentationStyle = .formSheet
+        navVC.modalPresentationStyle = .fullScreen
+        
         
         self.present(navVC, animated: true)
     }
