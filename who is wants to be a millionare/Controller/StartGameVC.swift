@@ -37,10 +37,12 @@ class StartGameVC: UIViewController {
         settingConstraints()
         startTimer()
         updateUI()
+        generalStackView.promtStackView.promtFour.isEnabled = false
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         player?.stop()
         timer?.invalidate()
     }
@@ -61,7 +63,6 @@ extension StartGameVC {
             print("Three")
         case 4:
             takeMoney()
-            
         default:
             print("Error")
         }
@@ -69,7 +70,7 @@ extension StartGameVC {
     
     private func takeMoney() {
         
-        let money = questionBrain.getMoney()
+        let money = questionBrain.savedMoneyCheck()
         let vc = LoseViewController()
         vc.modalPresentationStyle = .fullScreen
         vc.takenMoney(money: money)
@@ -102,13 +103,12 @@ extension StartGameVC {
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in // 5
                 if questionBrain.checkAnswer(answer: answerUser) {
                     vc.trueOrFalse = true
-                    playSound("Верный ответ")
-                    checkVersion(button: sender, color: BackgroundColors.green.rawValue)
+                    self.checkVersion(button: sender, color: BackgroundColors.green.rawValue)
                 } else {
                     vc.trueOrFalse = false
-                    playSound("Неверный ответ")
                     checkVersion(button: sender, color: BackgroundColors.red.rawValue)
                 }
+                player?.stop()
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // 1
                     self.present(vc, animated: true)
@@ -116,10 +116,11 @@ extension StartGameVC {
                     if vc.trueOrFalse {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { // 3
                             self.correctAnswerTapped(button: sender)
+                            self.generalStackView.promtStackView.promtFour.isEnabled = true
                         }
                     }
                     self.checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
-                    self.generalStackView.unubledButtons(trueFalse: false)
+                    self.generalStackView.unubledButtons(trueFalse: true)
                 }
                 
             }
@@ -156,7 +157,6 @@ extension StartGameVC {
         if count > 0 {
             count -= 1
             generalStackView.setTextForCountLabel(text: "\(count)")
-            
         } else {
             buttonDidNotPressed()
             if let timer = timer {
@@ -234,9 +234,7 @@ extension StartGameVC {
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
-            
             guard let player = player else { return }
-            
             player.play()
             
         } catch let error {
