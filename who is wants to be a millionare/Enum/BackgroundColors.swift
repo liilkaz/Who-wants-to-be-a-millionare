@@ -13,5 +13,4 @@ enum BackgroundColors: String {
     case purple
     case green
     case red
-    case background
 }

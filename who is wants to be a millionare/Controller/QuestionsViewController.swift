@@ -12,15 +12,10 @@ class QuestionsViewController: UIViewController {
     private var questionListBrain = QuestionListBrain()
     var trueOrFalse = false
     var currentQuestion = 0
+    var wonMoney = 0
     
     // Creating background image
-    private let backgroundImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: BackgroundColors.background.rawValue)
-        image.contentMode = .scaleAspectFill
-        
-        return image
-    }()
+    private let backgroundView = Background(frame: .zero)
     
     // Creating logo
     private let logoImage: UIImageView = {
@@ -54,7 +49,7 @@ extension QuestionsViewController {
     
     // Update for elements
     private func viewUpdate() {
-        view.addSubview(backgroundImage)
+        view.addSubview(backgroundView)
         view.addSubview(stackView)
         createImages()
         setupConstraints()
@@ -73,16 +68,16 @@ extension QuestionsViewController {
             
             question.questionNumberLabel.text = "Вопрос \(questionListBrain.questionNumberArray[index])"
             question.moneyLabel.text = "\(questionListBrain.moneyList[index]) ₽"
-            
-            
-            // MARK: - Переход на экран проигрыша
-            //            if trueOrFalse == false {
-            //                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            //                    let loseVC = LoseViewController()
-            //                    loseVC.modalPresentationStyle = .fullScreen
-            //                    self.present(loseVC, animated: true)
-            //                }
-            //            }
+
+            // MARK: - Переход на экран проигрыша/выигрыша
+            if trueOrFalse == false {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    let loseVC = LoseViewController()
+                    loseVC.modalPresentationStyle = .fullScreen
+                    loseVC.wonMoney = self.wonMoney
+                    self.present(loseVC, animated: true)
+                }
+            }
             
             stackView.addArrangedSubview(question)
             
@@ -95,17 +90,17 @@ extension QuestionsViewController {
         
     }
     
-    // Creating constraints for elements
+    // MARK: - CREATING CONSTRAINTS FOR ELEMENTS
     private func setupConstraints() {
-        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            backgroundImage.leftAnchor.constraint(equalTo: view.leftAnchor),
-            backgroundImage.rightAnchor.constraint(equalTo: view.rightAnchor),
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
@@ -116,6 +111,7 @@ extension QuestionsViewController {
             
         ])
     }
-    
+
 }
+
 
