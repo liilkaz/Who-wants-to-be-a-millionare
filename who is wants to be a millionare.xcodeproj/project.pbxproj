@@ -43,7 +43,7 @@
 		52C75DDA29928A4C00E80814 /* MoneyStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyStackView.swift; sourceTree = "<group>"; };
 		52C75DDC29928A7300E80814 /* AnswerStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerStackView.swift; sourceTree = "<group>"; };
 		52C75DDE29928C1600E80814 /* PromtStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromtStackView.swift; sourceTree = "<group>"; };
-		52EC8E8A29958F6600DA8E50 /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AskView.swift; path = "who is wants to be a millionare/AskView.swift"; sourceTree = SOURCE_ROOT; };
+		52EC8E8A29958F6600DA8E50 /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AskView.swift; path = "who is wants to be a millionare/View/StackViewForStartGameVC/AskView.swift"; sourceTree = SOURCE_ROOT; };
 		751F5B1B29901EA3000F8A98 /* who is wants to be a millionare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "who is wants to be a millionare.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		751F5B1E29901EA3000F8A98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		751F5B2029901EA3000F8A98 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +87,7 @@
 				52C75DDA29928A4C00E80814 /* MoneyStackView.swift */,
 				52C75DDC29928A7300E80814 /* AnswerStackView.swift */,
 				52C75DDE29928C1600E80814 /* PromtStackView.swift */,
+				52EC8E8A29958F6600DA8E50 /* AskView.swift */,
 			);
 			path = StackViewForStartGameVC;
 			sourceTree = "<group>";
@@ -139,7 +140,6 @@
 			children = (
 				751F5B2229901EA3000F8A98 /* ViewController.swift */,
 				525F32542992868F0012B9B9 /* StartGameVC.swift */,
-				52EC8E8A29958F6600DA8E50 /* AskView.swift */,
 				D017EA332992D61C00731EA0 /* QuestionsViewController.swift */,
 				D0E5956B29950ED20036B93C /* LoseViewController.swift */,
 				76170714299457F000CD58FC /* RulesViewController.swift */,

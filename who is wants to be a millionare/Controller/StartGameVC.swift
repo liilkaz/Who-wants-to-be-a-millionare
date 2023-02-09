@@ -35,7 +35,7 @@ class StartGameVC: UIViewController {
         
         addAllSubview()
         settingConstraints()
-//        startTimer()
+        startTimer()
         updateUI()
         generalStackView.promtStackView.promtFour.isEnabled = false
         
@@ -75,10 +75,13 @@ extension StartGameVC {
         setConstraintsForAskView(askView: view)
         
         let arrayAsk = questionBrain.askTheAudienceResult()
-        view.labelA.text = arrayAsk[0].description + "%"
-        view.labelB.text = arrayAsk[1].description + "%"
-        view.labelC.text = arrayAsk[2].description + "%"
-        view.labelD.text = arrayAsk[3].description + "%"
+        view.labelA.text = "A: \(arrayAsk[0]) %"
+        view.labelB.text = "B: \(arrayAsk[1]) %"
+        view.labelC.text = "C: \(arrayAsk[2]) %"
+        view.labelD.text = "D: \(arrayAsk[3]) %"
+        
+        generalStackView.promtStackView.promtTwo.isEnabled = false
+        generalStackView.promtStackView.promtTwo.setBackgroundImage(UIImage(named: "button2Used"), for: .normal)
         
 
     }

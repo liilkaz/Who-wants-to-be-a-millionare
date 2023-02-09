@@ -9,32 +9,32 @@ import UIKit
 
 class ViewAsk: UIView {
     
+    // BackgroundView
+    private let backgroundView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "image3")
+        return imageView
+    }()
+    
     lazy var askTheAudience: UILabel = {
-        
         return createLabel(text: "Помощь зала", size: 30, color: .purple)
         
     }()
     
     lazy var labelA: UILabel = {
-        
         return createLabel(text: "Hello", size: 20, color: .white)
-        
     }()
     
     lazy var labelB: UILabel = {
-        
         return createLabel(text: "Hello", size: 20, color: .white)
-        
     }()
     
     lazy var labelC: UILabel = {
-        
         return createLabel(text: "Hello", size: 20, color: .white)
-        
     }()
     
     lazy var labelD: UILabel = {
-        
         return createLabel(text: "Hello", size: 20, color: .white)
     }()
     
@@ -62,6 +62,7 @@ class ViewAsk: UIView {
         
         layer.cornerRadius = 24
         backgroundColor = UIColor.gray.withAlphaComponent(0.90)
+        addSubview(backgroundView)
         addSubview(askTheAudience)
         addSubview(button)
         addSubview(stackView)
@@ -75,7 +76,7 @@ class ViewAsk: UIView {
         
         let label = UILabel()
         label.text = text
-        label.font = .systemFont(ofSize: size)
+        label.font = .systemFont(ofSize: size, weight: .bold)
         label.textColor = color
         label.textAlignment = .center
         
@@ -95,6 +96,7 @@ class ViewAsk: UIView {
     func setConstraints() {
         
         askTheAudience.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
@@ -109,7 +111,14 @@ class ViewAsk: UIView {
             askTheAudience.heightAnchor.constraint(equalToConstant: 40),
             askTheAudience.widthAnchor.constraint(equalToConstant: 200),
             askTheAudience.centerXAnchor.constraint(equalTo: centerXAnchor),
-            askTheAudience.topAnchor.constraint(equalTo: topAnchor, constant: 10)
+            askTheAudience.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            
+            backgroundView.topAnchor.constraint(equalTo: topAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            
+            
             
         ])
                 
