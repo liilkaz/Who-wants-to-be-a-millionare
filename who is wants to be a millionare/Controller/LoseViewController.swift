@@ -25,6 +25,7 @@ class LoseViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 50, weight: .bold)
         label.textColor = .systemBackground
+        label.textAlignment = .center
         label.numberOfLines = 0
         
         return label
@@ -54,7 +55,7 @@ class LoseViewController: UIViewController {
 
         viewUpdate()
         setupConstraints()
-        titleUpdate()
+//        titleUpdate()
     }
     
 }
@@ -64,6 +65,11 @@ extension LoseViewController {
     private func viewUpdate() {
         view.addSubview(backgroundView)
         view.addSubview(verticalStack)
+    }
+    
+    func takenMoney(money: Int) {
+        
+        titleLabel.text = "Вы выиграли \(money)"
     }
     
     private func titleUpdate() {

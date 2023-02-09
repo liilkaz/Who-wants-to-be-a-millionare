@@ -40,6 +40,11 @@ class StartGameVC: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        player?.stop()
+        timer?.invalidate()
+    }
+    
 }
 
 // MARK: - ADDING OBJC ACTIONS
@@ -54,10 +59,22 @@ extension StartGameVC {
             print("Two")
         case 3:
             print("Three")
+        case 4:
+            takeMoney()
             
         default:
             print("Error")
         }
+    }
+    
+    private func takeMoney() {
+        
+        let money = questionBrain.getMoney()
+        let vc = LoseViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.takenMoney(money: money)
+        self.present(vc, animated: true)
+        
     }
     
     // MARK: BUTTON TAPPED
