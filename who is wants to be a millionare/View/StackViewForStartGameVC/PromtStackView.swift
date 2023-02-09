@@ -23,13 +23,17 @@ class PromtStackView: UIStackView {
         return settingButton(imageName: "button3", tag: 3)
     }()
     
+    lazy var promtFour: UIButton = {
+        return settingButton(imageName: "button4", tag: 4)
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         axis = .horizontal
         alignment = .fill
         distribution = .fillEqually
-        spacing = 40
+        spacing = 20
         
         addArrangedAllSubview()
         settingConstraints()
@@ -41,6 +45,7 @@ class PromtStackView: UIStackView {
         addArrangedSubview(promtOne)
         addArrangedSubview(promtTwo)
         addArrangedSubview(promtThree)
+        addArrangedSubview(promtFour)
     }
     
     // MARK: settingConstraints
