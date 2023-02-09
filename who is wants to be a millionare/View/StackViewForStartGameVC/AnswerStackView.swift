@@ -16,7 +16,6 @@ class AnswerStackView: UIStackView {
     }()
     
     lazy var buttonTwo: UIButton = {
-        
         return settingButton(title: "Vasya", imageName: "b.circle")
     }()
     
@@ -92,6 +91,13 @@ extension AnswerStackView {
             return button
         }
         
+    }
+    
+    func unableButtons(trueFalse: Bool) {
+        buttonOne.isUserInteractionEnabled = trueFalse
+        buttonTwo.isUserInteractionEnabled = trueFalse
+        buttonThree.isUserInteractionEnabled = trueFalse
+        buttonFour.isUserInteractionEnabled = trueFalse
     }
     
     @available(iOS 15.0, *)

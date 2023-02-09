@@ -53,6 +53,10 @@ class GeneralStackView: UIStackView {
         moneyStackView.setTextForCountLabel(text: text)
     }
     
+    func unubledButtons(trueFalse: Bool) {
+        answerStackView.unableButtons(trueFalse: trueFalse)
+    }
+    
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
