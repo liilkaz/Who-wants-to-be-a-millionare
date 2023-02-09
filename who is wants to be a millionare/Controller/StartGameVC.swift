@@ -10,24 +10,24 @@ import AVFoundation
 
 class StartGameVC: UIViewController {
     
-    var questionBrain = QuestionBrain()
+    private var questionBrain = QuestionBrain()
     
     // mainStackView
-    let mainStackView: GeneralStackView = {
+    private let mainStackView: GeneralStackView = {
         let stack = GeneralStackView(frame: .zero)
         return stack
     }()
     // BackgroundView
-    let backgroundView: Background = {
+    private let backgroundView: Background = {
         return Background(frame: .zero)
     }()
     
     // AudioPlayer
-    var player: AVAudioPlayer?
+    private var player: AVAudioPlayer?
     
     // Timer
-    var timer: Timer?
     
+    private var timer: Timer?
     private var count = 30
     
     override func viewDidLoad() {
@@ -40,10 +40,14 @@ class StartGameVC: UIViewController {
         
     }
     
+}
+
+// MARK: - ADDING OBJC ACTIONS
+extension StartGameVC {
+    
     @objc func promtButton(sender: UIButton) {
         
         switch sender.tag {
-            
         case 1:
             promtFiftyFifty(sender: sender)
         case 2:
@@ -56,56 +60,60 @@ class StartGameVC: UIViewController {
         }
     }
     
-    // MARK: FIFTY FIFTY PROMT BUTTON
-    func promtFiftyFifty(sender: UIButton) {
-        
-        let question = questionBrain.getfiftyFiftyArray()
-        setTitleButton(textButton: question)
-        sender.setBackgroundImage(UIImage(named: "button1Used"), for: .normal)
-        sender.isEnabled = false
-        
-    }
-    
     // MARK: BUTTON TAPPED
     @objc func buttonAnswer(sender: UIButton) {
         
-        self.count = 30
+        guard let title = sender.titleLabel,
+              let answerUser = title.text else { return }
         
-        guard let title = sender.titleLabel, let userAnswer = title.text else { return }
+        let vc = QuestionsViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.wonMoney = questionBrain.savedMoneyCheck() // Несгораемая сумма
+        print(vc.wonMoney)
         
-        if userAnswer != " " {
-            let userGotItRight = questionBrain.checkAnswer(answer: userAnswer)
+        // MARK: Проверка на пустую кнопку
+        if answerUser != " " {
             
-            if userGotItRight {
-                if #available(iOS 15.0, *) {
-                    sender.configuration?.background.image = UIImage(named: "green")
-                } else {
-                    sender.setBackgroundImage(UIImage(named: "green"), for: .normal)
-                }
-            } else {
-                if #available(iOS 15.0, *) {
-                    sender.configuration?.background.image = UIImage(named: "red")
-                } else {
-                    sender.setBackgroundImage(UIImage(named: "red"), for: .normal)
-                }
-            }
-            
-            questionBrain.nextQuestion()
-            
+            self.count = 30
+            player?.stop()
             timer?.invalidate()
-            startTimer()
+            playSound("Ответ принят")
+            vc.currentQuestion = questionBrain.questionNumber + 1
+            checkVersion(button: sender, color: BackgroundColors.yellow.rawValue)
             
-            Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in // 5
+                if questionBrain.checkAnswer(answer: answerUser) {
+                    vc.trueOrFalse = true
+                    playSound("Верный ответ")
+                    checkVersion(button: sender, color: BackgroundColors.green.rawValue)
+                } else {
+                    vc.trueOrFalse = false
+                    playSound("Неверный ответ")
+                    checkVersion(button: sender, color: BackgroundColors.red.rawValue)
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // 1
+                    self.present(vc, animated: true)
+                    
+                    if vc.trueOrFalse {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // 3
+                            self.correctAnswerTapped(button: sender)
+                        }
+                    }
+                    self.checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
+                }
+                
+            }
         }
         
     }
     
-    @objc func updateUI() {
+    @objc private func updateUI() {
         
         let textButton = questionBrain.getQuestionTextButton()
         mainStackView.questionStackView.questionLabel.text = questionBrain.getQuestionText()
-        mainStackView.moneyStackView.questionCountLabel.text = "Question \(questionBrain.questionNumber + 1)"
-        mainStackView.moneyStackView.moneyCountLabel.text = "\(questionBrain.getMoney()) RUB"
+        mainStackView.moneyStackView.questionCountLabel.text = "Вопрос \(questionBrain.questionNumber + 1)"
+        mainStackView.moneyStackView.moneyCountLabel.text = "\(questionBrain.getMoney()) ₽"
         
         setTitleButton(textButton: textButton)
         
@@ -123,26 +131,7 @@ class StartGameVC: UIViewController {
         
     }
     
-    // For Button Set Title
-    
-    func setTitleButton(textButton: [String]) {
-        
-        mainStackView.answerStackView.buttonOne.setTitle(textButton[0], for: .normal)
-        mainStackView.answerStackView.buttonTwo.setTitle(textButton[1], for: .normal)
-        mainStackView.answerStackView.buttonThree.setTitle(textButton[2], for: .normal)
-        mainStackView.answerStackView.buttonFour.setTitle(textButton[3], for: .normal)
-    }
-    
-    // MARK: START TIMER
-    private func startTimer() {
-        
-        playSound("zvuk-chasov")
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-        mainStackView.setTextForCountLabel(text: count.description)
-        
-    }
-    
-    @objc func updateTimer() {
+    @objc private func updateTimer() {
         
         if count > 0 {
             count -= 1
@@ -155,9 +144,57 @@ class StartGameVC: UIViewController {
             }
         }
     }
+}
+
+// MARK: - ADDING StartGameVC METHODS
+extension StartGameVC {
     
-    // MARK: PlAY SOUND
-    func playSound(_ soundName: String) {
+    // MARK: - ADD All SUBVIEW
+    private func addAllSubview() {
+        view.addSubview(backgroundView)
+        view.addSubview(mainStackView)
+    }
+    
+    // MARK: - SETTING CONSTRAINTS
+    private func settingConstraints() {
+        
+        // MARK: BackgroundView Constraints
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        // MARK: MainStackView Constraints
+        NSLayoutConstraint.activate([
+            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    // MARK: - For Button Set Title
+    private func setTitleButton(textButton: [String]) {
+        
+        mainStackView.answerStackView.buttonOne.setTitle(textButton[0], for: .normal)
+        mainStackView.answerStackView.buttonTwo.setTitle(textButton[1], for: .normal)
+        mainStackView.answerStackView.buttonThree.setTitle(textButton[2], for: .normal)
+        mainStackView.answerStackView.buttonFour.setTitle(textButton[3], for: .normal)
+    }
+    
+    // MARK: - START TIMER
+    private func startTimer() {
+        
+        playSound("zvuk-chasov")
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        mainStackView.setTextForCountLabel(text: count.description)
+        
+    }
+    
+    // MARK: - PLAY SOUND
+    private func playSound(_ soundName: String) {
         
         guard let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") else { return }
         
@@ -173,31 +210,33 @@ class StartGameVC: UIViewController {
         }
     }
     
-    // MARK: addAllSubview
-    private func addAllSubview() {
+    // MARK: - ACTION IN CASE CORRECT ANSWER
+    private func correctAnswerTapped(button: UIButton) {
+        self.questionBrain.nextQuestion()
+        self.timer?.invalidate()
+        self.startTimer()
+        self.dismiss(animated: true)
         
-        self.view.addSubview(backgroundView)
-        self.view.addSubview(mainStackView)
-        
+        Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.updateUI), userInfo: nil, repeats: false)
     }
-    // MARK: settingConstraints
-    private func settingConstraints() {
+    
+    // MARK: - CHECKING DEVICE VERSION
+    private func checkVersion(button: UIButton, color: String) {
+        if #available(iOS 15.0, *) {
+            button.configuration?.background.image = UIImage(named: color)
+        } else {
+            button.setBackgroundImage(UIImage(named: color), for: .normal)
+        }
+    }
+    
+    // MARK: - FIFTY FIFTY PROMT BUTTON
+    private func promtFiftyFifty(sender: UIButton) {
         
-        // backgroundView Constraints
-        NSLayoutConstraint.activate([
-            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        let question = questionBrain.getFiftyFiftyArray()
+        setTitleButton(textButton: question)
+        sender.setBackgroundImage(UIImage(named: "button1Used"), for: .normal)
+        sender.isEnabled = false
         
-        // mainStackView Constraints
-        NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mainStackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            mainStackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
     }
     
 }
