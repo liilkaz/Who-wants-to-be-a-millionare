@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class QuestionsViewController: UIViewController {
     
@@ -13,6 +14,7 @@ class QuestionsViewController: UIViewController {
     var trueOrFalse = false
     var currentQuestion = 0
     var wonMoney = 0
+    private var player: AVAudioPlayer?
     
     // Creating background image
     private let backgroundView = Background(frame: .zero)
@@ -47,6 +49,23 @@ class QuestionsViewController: UIViewController {
 
 extension QuestionsViewController {
     
+    // MARK: - PLAY SOUND
+    private func playSound(_ soundName: String) {
+        
+        guard let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") else { return }
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            
+            guard let player = player else { return }
+            
+            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
     // Update for elements
     private func viewUpdate() {
         view.addSubview(backgroundView)
@@ -71,6 +90,7 @@ extension QuestionsViewController {
 
             // MARK: - Переход на экран проигрыша/выигрыша
             if trueOrFalse == false {
+                playSound("Неверный ответ")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     let loseVC = LoseViewController()
                     loseVC.modalPresentationStyle = .fullScreen
@@ -78,7 +98,7 @@ extension QuestionsViewController {
                     self.present(loseVC, animated: true)
                 }
             }
-            
+            playSound("Верный ответ")
             stackView.addArrangedSubview(question)
             
             NSLayoutConstraint.activate([

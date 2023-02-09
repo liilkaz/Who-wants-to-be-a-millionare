@@ -31,7 +31,7 @@ struct QuestionBrain {
     
     private let hardQuestions = [
         Question(question: "Какой период времени в жизни молодоженов начинается сразу после свадьбы?", answers: ["Мёртвый сезон", "Тихий час", "Медовый месяц", "Санитарный день"].shuffled(), correctAnswer: "Медовый месяц"),
-
+        
         Question(question: "В честь чего был назван компьютер компании - Макинтош?", answers: ["Сорт яблок", "Населённый пункт", "Зонт", " Вид плаща"].shuffled(), correctAnswer: "Сорт яблок"),
         
         Question(question: "В каком году родился Владимир Набоков?", answers: ["1903", "1899","1889", "1900"].shuffled(), correctAnswer: "1899"),
@@ -49,8 +49,15 @@ struct QuestionBrain {
         questions = easyQuestions + mediumQuestions + hardQuestions
     }
     
+    func saveMoneyButtonInteraction() -> Bool {
+        if questionNumber == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+    
     func checkAnswer(answer userAnswer: String) -> Bool {
-        
         if userAnswer == questions[questionNumber].correctAnswer {
             return true
         } else {
@@ -64,31 +71,24 @@ struct QuestionBrain {
     }
     
     func savedMoneyCheck() -> Int {
-        let money = moneyList[questionNumber]
-        var returnNumber = 0
-        if money == 1000 || money == 32000 || money == 1000000 {
-            returnNumber = money
+        if questionNumber == 0 {
+            return 0
+        } else {
+            return moneyList[questionNumber - 1]
         }
-        
-        return returnNumber
     }
     
     func getQuestionText() -> String {
-        
         let text = questions[questionNumber].question
-        
         return text
     }
     
     func getQuestion() -> Question {
-        
         return questions[questionNumber]
     }
     
     func getQuestionTextButton() -> [String] {
-        
         let text = questions[questionNumber].answers
-        
         return text
     }
     
@@ -116,12 +116,12 @@ struct QuestionBrain {
     }
     
     mutating func nextQuestion() {
-        
         if questionNumber < questions.count - 1 {
             questionNumber += 1
-
         } else {
             questionNumber = 0
         }
     }
+    
 }
+
