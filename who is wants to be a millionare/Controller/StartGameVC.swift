@@ -73,7 +73,6 @@ extension StartGameVC {
         let view = ViewAsk(frame: .zero)
         self.view.addSubview(view)
         setConstraintsForAskView(askView: view)
-        
         let arrayAsk = questionBrain.askTheAudienceResult()
         view.labelA.text = "A: \(arrayAsk[0]) %"
         view.labelB.text = "B: \(arrayAsk[1]) %"
@@ -82,7 +81,6 @@ extension StartGameVC {
         
         generalStackView.promtStackView.promtTwo.isEnabled = false
         generalStackView.promtStackView.promtTwo.setBackgroundImage(UIImage(named: "button2Used"), for: .normal)
-        
 
     }
     

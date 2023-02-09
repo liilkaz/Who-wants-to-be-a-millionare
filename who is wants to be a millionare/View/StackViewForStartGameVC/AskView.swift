@@ -62,14 +62,34 @@ class ViewAsk: UIView {
         
         layer.cornerRadius = 24
         backgroundColor = UIColor.gray.withAlphaComponent(0.90)
+        
         addSubview(backgroundView)
         addSubview(askTheAudience)
         addSubview(button)
         addSubview(stackView)
-        
-        
         translatesAutoresizingMaskIntoConstraints = false
         setConstraints()
+        moveIn()
+        
+    }
+    
+    func moveIn() {
+            transform = CGAffineTransform(scaleX: 1.35, y: 1.35)
+            alpha = 0.0
+            
+            UIView.animate(withDuration: 0.24) {
+                self.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                self.alpha = 1.0
+            }
+        }
+    
+    func moveOut() {
+        UIView.animate(withDuration: 0.24, animations: {
+            self.transform = CGAffineTransform(scaleX: 1.35, y: 1.35)
+            self.alpha = 0.0
+        }) { _ in
+            self.removeFromSuperview()
+        }
     }
     
     func createLabel(text: String, size: CGFloat, color: UIColor) -> UILabel {
@@ -84,14 +104,12 @@ class ViewAsk: UIView {
     }
     
     @objc func dismissButton() {
-        self.removeFromSuperview()
+        moveOut()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
     
     func setConstraints() {
         
@@ -117,11 +135,8 @@ class ViewAsk: UIView {
             backgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: bottomAnchor)
-            
-            
-            
+
         ])
-                
     }
     
 }
