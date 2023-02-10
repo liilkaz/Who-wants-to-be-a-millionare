@@ -41,6 +41,8 @@ class StartGameVC: UIViewController {
         
     }
     
+    
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         player?.stop()
@@ -167,23 +169,34 @@ extension StartGameVC {
         let view = AudienceAskResultView(frame: .zero)
         self.view.addSubview(view)
         setConstraintsForAskView(askView: view)
+        self.backgroundView.layer.opacity = 0.5
+        view.delegate = self
+
         let arrayAsk = questionBrain.askTheAudienceResult()
         view.labelA.text = "A: \(arrayAsk[0]) %"
-        view.answerAPercent.progress = Float(arrayAsk[0]) / 100
+        view.answerAPercent.progress = calculatePercentage(element: arrayAsk[0])
         
         view.labelB.text = "B: \(arrayAsk[1]) %"
-        view.answerBPercent.progress = Float(arrayAsk[1]) / 100
+        view.answerBPercent.progress = calculatePercentage(element: arrayAsk[1])
         
         view.labelC.text = "C: \(arrayAsk[2]) %"
-        view.answerCPercent.progress = Float(arrayAsk[2]) / 100
+        view.answerCPercent.progress = calculatePercentage(element: arrayAsk[2])
         
         view.labelD.text = "D: \(arrayAsk[3]) %"
-        view.answerDPercent.progress = Float(arrayAsk[3]) / 100
+        view.answerDPercent.progress = calculatePercentage(element: arrayAsk[3])
         
         generalStackView.promtStackView.promtTwo.isEnabled = false
         generalStackView.promtStackView.promtTwo.setBackgroundImage(UIImage(named: "button2Used"), for: .normal)
         
     }
+    
+    private func calculatePercentage(element: Int) -> Float {
+        
+        let percentage = Float(element) / 100
+        
+        return percentage
+    }
+    
     
     private func setConstraintsForAskView(askView: UIView) {
         
@@ -304,6 +317,14 @@ extension StartGameVC {
         sender.setBackgroundImage(UIImage(named: "button1Used"), for: .normal)
         sender.isEnabled = false
         
+    }
+    
+}
+
+extension StartGameVC: AudienceAskResultViewDelegate {
+    
+    func change(opacity: Float) {
+        self.backgroundView.layer.opacity = opacity
     }
     
 }
