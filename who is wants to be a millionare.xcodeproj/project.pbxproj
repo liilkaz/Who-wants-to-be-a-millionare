@@ -173,9 +173,9 @@
 		D017EA262992CB4100731EA0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D017EA272992CB8500731EA0 /* QuestionListBrain.swift */,
-				D017EA2C2992D50400731EA0 /* QuestionBrain.swift */,
 				D00A52B52992E22C0084D763 /* QuestionModel.swift */,
+				D017EA2C2992D50400731EA0 /* QuestionBrain.swift */,
+				D017EA272992CB8500731EA0 /* QuestionListBrain.swift */,
 				D0E5956D29950EE50036B93C /* FinalScreenBrain.swift */,
 			);
 			path = Model;

@@ -8,11 +8,9 @@
 import UIKit
 
 class RulesViewController: UIViewController {
-    
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "background")
-        imageView.frame = self.view.bounds
+
+    private lazy var imageView: Background = {
+        let imageView = Background(frame: .zero)
         return imageView
     }()
     
@@ -20,6 +18,7 @@ class RulesViewController: UIViewController {
         let textView = UITextView()
         textView.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         textView.backgroundColor = .clear
+        textView.textColor = .black
         textView.text = """
     Вы должны правильно ответить на ряд вопросов с несколькими вариантами ответов, чтобы перейти на следующий уровень. Всего 15 вопросов, каждый вопрос стоит определенной суммы денег, нет никаких временных ограничений для предоставления ответа (для ответа на каждый вопрос дается 30 секунд). Также Вы получаете три вида подсказок, если Вы застряли на конкретном вопросе.
     Вопросы “Кто хочет стать миллионером?” структурированы в соответствии с пятью различными уровнями, причем уровень сложности постепенно увеличивается. Каждый уровень содержит пять вопросов. Вопросы, сгруппированные на одном уровне, будут иметь одинаковую сложность.
@@ -51,8 +50,7 @@ class RulesViewController: UIViewController {
 """
         return textView
     }()
-    
-    // Добавляю тайтл и бар айтем. Также метод рулесДисмисс
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,9 +69,8 @@ class RulesViewController: UIViewController {
     @objc private func rulesDismiss() {
         dismiss(animated: true)
     }
-    // конец редакции
-}
 
+}
 
 //MARK: - Setup Views
 extension RulesViewController {
@@ -82,8 +79,6 @@ extension RulesViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         textView.translatesAutoresizingMaskIntoConstraints = false
 
-
-        
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
             imageView.rightAnchor.constraint(equalTo: view.rightAnchor),

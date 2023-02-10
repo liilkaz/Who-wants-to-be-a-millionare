@@ -44,22 +44,18 @@ class ViewController: UIViewController {
     }
     
     @objc func buttonStartGamePressed(sender: UIButton){
-        
         let startGameVC = StartGameVC()
         startGameVC.modalPresentationStyle = .fullScreen
         self.present(startGameVC, animated: true)
     }
-    
-    // Изменил данный метод, добавив навигейшн
+
     @objc func rulesButtonPressed (sender: UIButton) {
         let rulesController = RulesViewController()
         
         let navVC = UINavigationController(rootViewController: rulesController)
         navVC.modalPresentationStyle = .fullScreen
         
-        
         self.present(navVC, animated: true)
     }
-    // конец редакции
 }
 
