@@ -61,18 +61,33 @@ extension StartGameVC {
         
         // MARK: Проверка на пустую кнопку
         if answerUser != " " {
+            let answerResponse = checkAnswer(trueOrFalse: questionBrain.checkAnswer(answer: answerUser))
+            let currentQuestion = questionBrain.questionNumber + 1
+            questionsVC.currentQuestion = currentQuestion
+            answerTappedPreparation(sender: sender)
+            
             if promt {
-                checkVersion(button: sender, color: BackgroundColors.red.rawValue)
-                generalStackView.enableButtons(trueFalse: true)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in // 5
+                    
+                    questionsVC.trueOrFalse = answerResponse.trueFalse
+                    checkVersion(button: sender, color: answerResponse.color)
+                    
+                    switch questionsVC.trueOrFalse {
+                    case true:
+                        answerRightAction(sender: sender, controller: questionsVC,
+                                          trueFalse: questionsVC.trueOrFalse, question: currentQuestion)
+                    case false:
+                        playSound("zvuk-chasov")
+                        startTimer()
+                        generalStackView.enableButtons(trueFalse: true)
+                        generalStackView.enablePromts(trueFalse: true)
+                    }
+                }
+                
                 promt = false
                 
             } else {
-                
-                let currentQuestion = questionBrain.questionNumber + 1
-                let answerResponse = checkAnswer(trueOrFalse: questionBrain.checkAnswer(answer: answerUser))
-                
-                questionsVC.currentQuestion = currentQuestion
-                answerTappedPreparation(sender: sender)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in // 5
                     
@@ -291,7 +306,6 @@ extension StartGameVC {
         playSound("zvuk-chasov")
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         generalStackView.setTextForCountLabel(text: count.description)
-        
     }
     
     // MARK: - PLAY SOUND
