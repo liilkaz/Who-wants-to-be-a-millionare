@@ -97,8 +97,9 @@ extension QuestionsViewController {
                     loseVC.wonMoney = self.wonMoney
                     self.present(loseVC, animated: true)
                 }
+            } else {
+                playSound("Верный ответ")
             }
-            playSound("Верный ответ")
             stackView.addArrangedSubview(question)
             
             NSLayoutConstraint.activate([

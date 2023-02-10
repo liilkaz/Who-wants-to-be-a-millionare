@@ -68,42 +68,6 @@ extension StartGameVC {
         }
     }
     
-    private func askTheAudience() {
-       
-        let view = ViewAsk(frame: .zero)
-        self.view.addSubview(view)
-        setConstraintsForAskView(askView: view)
-        let arrayAsk = questionBrain.askTheAudienceResult()
-        view.labelA.text = "A: \(arrayAsk[0]) %"
-        view.labelB.text = "B: \(arrayAsk[1]) %"
-        view.labelC.text = "C: \(arrayAsk[2]) %"
-        view.labelD.text = "D: \(arrayAsk[3]) %"
-        
-        generalStackView.promtStackView.promtTwo.isEnabled = false
-        generalStackView.promtStackView.promtTwo.setBackgroundImage(UIImage(named: "button2Used"), for: .normal)
-
-    }
-    
-    func setConstraintsForAskView(askView: UIView) {
-        
-        NSLayoutConstraint.activate([
-            askView.heightAnchor.constraint(equalToConstant: 300),
-            askView.widthAnchor.constraint(equalToConstant: 300),
-            askView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            askView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-        ])
-        
-    }
-    
-    private func takeMoney() {
-        
-        let money = questionBrain.savedMoneyCheck()
-        let vc = LoseViewController()
-        vc.modalPresentationStyle = .fullScreen
-        vc.takenMoney(money: money)
-        self.present(vc, animated: true)
-        
-    }
     
     // MARK: BUTTON TAPPED
     @objc func buttonAnswer(sender: UIButton) {
@@ -198,6 +162,50 @@ extension StartGameVC {
 // MARK: - ADDING StartGameVC METHODS
 extension StartGameVC {
     
+    private func askTheAudience() {
+        
+        let view = AudienceAskResultView(frame: .zero)
+        self.view.addSubview(view)
+        setConstraintsForAskView(askView: view)
+        let arrayAsk = questionBrain.askTheAudienceResult()
+        view.labelA.text = "A: \(arrayAsk[0]) %"
+        view.answerAPercent.progress = Float(arrayAsk[0]) / 100
+        
+        view.labelB.text = "B: \(arrayAsk[1]) %"
+        view.answerBPercent.progress = Float(arrayAsk[1]) / 100
+        
+        view.labelC.text = "C: \(arrayAsk[2]) %"
+        view.answerCPercent.progress = Float(arrayAsk[2]) / 100
+        
+        view.labelD.text = "D: \(arrayAsk[3]) %"
+        view.answerDPercent.progress = Float(arrayAsk[3]) / 100
+        
+        generalStackView.promtStackView.promtTwo.isEnabled = false
+        generalStackView.promtStackView.promtTwo.setBackgroundImage(UIImage(named: "button2Used"), for: .normal)
+        
+    }
+    
+    private func setConstraintsForAskView(askView: UIView) {
+        
+        NSLayoutConstraint.activate([
+            askView.heightAnchor.constraint(equalToConstant: 300),
+            askView.widthAnchor.constraint(equalToConstant: 300),
+            askView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            askView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+        
+    }
+    
+    private func takeMoney() {
+        
+        let money = questionBrain.savedMoneyCheck()
+        let vc = LoseViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.takenMoney(money: money)
+        self.present(vc, animated: true)
+        
+    }
+    
     private func buttonDidNotPressed() {
         let vc = QuestionsViewController()
         vc.modalPresentationStyle = .fullScreen
@@ -257,7 +265,8 @@ extension StartGameVC {
     // MARK: - PLAY SOUND
     private func playSound(_ soundName: String) {
         
-        guard let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") else { return }
+        guard let url = Bundle.main.url(forResource: soundName,
+                                        withExtension: "mp3") else { return }
         
         do {
             player = try AVAudioPlayer(contentsOf: url)
@@ -290,7 +299,6 @@ extension StartGameVC {
     
     // MARK: - FIFTY FIFTY PROMT BUTTON
     private func promtFiftyFifty(sender: UIButton) {
-        
         let question = questionBrain.getFiftyFiftyArray()
         setTitleButton(textButton: question)
         sender.setBackgroundImage(UIImage(named: "button1Used"), for: .normal)
