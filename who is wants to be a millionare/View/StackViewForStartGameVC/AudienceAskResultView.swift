@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol AudienceAskResultViewDelegate: AnyObject {
+    
+    func change(opacity: Float)
+}
+
 class AudienceAskResultView: UIView {
+    
+    weak var delegate: AudienceAskResultViewDelegate?
     
     // BackgroundView
     private let backgroundView: UIImageView = {
@@ -76,7 +83,9 @@ class AudienceAskResultView: UIView {
 
 // MARK: - AudienceAskResultView OBJC ACTIONS
 extension AudienceAskResultView {
+    
     @objc private func dismissButton() {
+        delegate?.change(opacity: 1)
         moveOut()
     }
 }
@@ -86,7 +95,7 @@ extension AudienceAskResultView {
     
     private func viewUpdate() {
         layer.cornerRadius = 24
-        backgroundColor = UIColor.gray.withAlphaComponent(0.90)
+        backgroundColor = UIColor.lightGray.withAlphaComponent(1)
         askTheAudience.text = "Помощь зала"
         addSubview(backgroundView)
         addSubview(askTheAudience)
