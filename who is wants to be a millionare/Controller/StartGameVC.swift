@@ -211,7 +211,7 @@ extension StartGameVC {
         vc.modalPresentationStyle = .fullScreen
         vc.currentQuestion = questionBrain.questionNumber + 1
         vc.trueOrFalse = false
-        playSound("Неверный ответ")
+        player?.stop()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // 1
             self.present(vc, animated: true)
