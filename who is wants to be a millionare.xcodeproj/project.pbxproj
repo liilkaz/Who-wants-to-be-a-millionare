@@ -29,11 +29,12 @@
 		D017EA322992D56300731EA0 /* QuestionBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA312992D56300731EA0 /* QuestionBackground.swift */; };
 		D017EA342992D61C00731EA0 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA332992D61C00731EA0 /* QuestionsViewController.swift */; };
 		D05915F42992C72100AEB917 /* zvuk-chasov.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */; };
+		D07B871D2996870D00E6D29C /* Выигрыш миллион.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D07B871C2996870D00E6D29C /* Выигрыш миллион.mp3 */; };
 		D0E5956629950E7A0036B93C /* Ответ принят.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D0E5956529950E7A0036B93C /* Ответ принят.mp3 */; };
 		D0E5956829950E7F0036B93C /* Неверный ответ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D0E5956729950E7F0036B93C /* Неверный ответ.mp3 */; };
 		D0E5956A29950E840036B93C /* Верный ответ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D0E5956929950E840036B93C /* Верный ответ.mp3 */; };
-		D0E5956C29950ED20036B93C /* LoseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5956B29950ED20036B93C /* LoseViewController.swift */; };
-		D0E5956E29950EE50036B93C /* LoseScreenBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5956D29950EE50036B93C /* LoseScreenBrain.swift */; };
+		D0E5956C29950ED20036B93C /* FinalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5956B29950ED20036B93C /* FinalViewController.swift */; };
+		D0E5956E29950EE50036B93C /* FinalScreenBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5956D29950EE50036B93C /* FinalScreenBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,11 +62,12 @@
 		D017EA312992D56300731EA0 /* QuestionBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBackground.swift; sourceTree = "<group>"; };
 		D017EA332992D61C00731EA0 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
 		D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "zvuk-chasov.mp3"; sourceTree = "<group>"; };
+		D07B871C2996870D00E6D29C /* Выигрыш миллион.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Выигрыш миллион.mp3"; sourceTree = "<group>"; };
 		D0E5956529950E7A0036B93C /* Ответ принят.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ответ принят.mp3"; sourceTree = "<group>"; };
 		D0E5956729950E7F0036B93C /* Неверный ответ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Неверный ответ.mp3"; sourceTree = "<group>"; };
 		D0E5956929950E840036B93C /* Верный ответ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Верный ответ.mp3"; sourceTree = "<group>"; };
-		D0E5956B29950ED20036B93C /* LoseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoseViewController.swift; sourceTree = "<group>"; };
-		D0E5956D29950EE50036B93C /* LoseScreenBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoseScreenBrain.swift; sourceTree = "<group>"; };
+		D0E5956B29950ED20036B93C /* FinalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalViewController.swift; sourceTree = "<group>"; };
+		D0E5956D29950EE50036B93C /* FinalScreenBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScreenBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E5956529950E7A0036B93C /* Ответ принят.mp3 */,
+				D07B871C2996870D00E6D29C /* Выигрыш миллион.mp3 */,
 				D0E5956929950E840036B93C /* Верный ответ.mp3 */,
 				D0E5956729950E7F0036B93C /* Неверный ответ.mp3 */,
 				D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */,
@@ -141,7 +144,7 @@
 				751F5B2229901EA3000F8A98 /* ViewController.swift */,
 				525F32542992868F0012B9B9 /* StartGameVC.swift */,
 				D017EA332992D61C00731EA0 /* QuestionsViewController.swift */,
-				D0E5956B29950ED20036B93C /* LoseViewController.swift */,
+				D0E5956B29950ED20036B93C /* FinalViewController.swift */,
 				76170714299457F000CD58FC /* RulesViewController.swift */,
 			);
 			path = Controller;
@@ -173,7 +176,7 @@
 				D017EA272992CB8500731EA0 /* QuestionListBrain.swift */,
 				D017EA2C2992D50400731EA0 /* QuestionBrain.swift */,
 				D00A52B52992E22C0084D763 /* QuestionModel.swift */,
-				D0E5956D29950EE50036B93C /* LoseScreenBrain.swift */,
+				D0E5956D29950EE50036B93C /* FinalScreenBrain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0E5956629950E7A0036B93C /* Ответ принят.mp3 in Resources */,
+				D07B871D2996870D00E6D29C /* Выигрыш миллион.mp3 in Resources */,
 				751F5B2B29901EA4000F8A98 /* LaunchScreen.storyboard in Resources */,
 				751F5B2829901EA4000F8A98 /* Assets.xcassets in Resources */,
 				D0E5956829950E7F0036B93C /* Неверный ответ.mp3 in Resources */,
@@ -271,14 +275,14 @@
 				D017EA2D2992D50400731EA0 /* QuestionBrain.swift in Sources */,
 				7540356C2992652200F1011A /* MainStackView.swift in Sources */,
 				52C75DDD29928A7300E80814 /* AnswerStackView.swift in Sources */,
-				D0E5956E29950EE50036B93C /* LoseScreenBrain.swift in Sources */,
+				D0E5956E29950EE50036B93C /* FinalScreenBrain.swift in Sources */,
 				D017EA282992CB8500731EA0 /* QuestionListBrain.swift in Sources */,
 				52EC8E8B29958F6600DA8E50 /* AudienceAskResultView.swift in Sources */,
 				525F32552992868F0012B9B9 /* StartGameVC.swift in Sources */,
 				751F5B2329901EA3000F8A98 /* ViewController.swift in Sources */,
 				D017EA322992D56300731EA0 /* QuestionBackground.swift in Sources */,
 				52C75DDB29928A4C00E80814 /* MoneyStackView.swift in Sources */,
-				D0E5956C29950ED20036B93C /* LoseViewController.swift in Sources */,
+				D0E5956C29950ED20036B93C /* FinalViewController.swift in Sources */,
 				52C75DD9299289FE00E80814 /* QuestionStackView.swift in Sources */,
 				52C75DDF29928C1600E80814 /* PromtStackView.swift in Sources */,
 				751F5B1F29901EA3000F8A98 /* AppDelegate.swift in Sources */,
