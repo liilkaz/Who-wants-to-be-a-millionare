@@ -55,7 +55,7 @@ class LoseViewController: UIViewController {
 
         viewUpdate()
         setupConstraints()
-//        titleUpdate()
+        titleUpdate()
     }
     
 }
@@ -68,7 +68,6 @@ extension LoseViewController {
     }
     
     func takenMoney(money: Int) {
-        
         titleLabel.text = "Вы выиграли \(money)"
     }
     
