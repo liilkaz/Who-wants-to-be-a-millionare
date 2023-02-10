@@ -80,6 +80,15 @@ struct QuestionBrain {
         var firstWrongAnswerPercent = 0
         var secondWrongAnswerPercent = 0
         var thirdWrongAnswerPercent = 0
+        var firstCase: Double = 70
+        var secondCase: Double = 80
+        var thirdCase: Double = 90
+        
+        if questionNumber >= 10 {
+            firstCase = 50
+            secondCase = 66.7
+            thirdCase = 83.4
+        }
         
         for _ in 1...100 {
             
@@ -88,32 +97,17 @@ struct QuestionBrain {
             }
             let randomNumber = randomPercent()
             
-            if questionNumber >= 10 {
-                switch(randomNumber) {
-                case 0..<50:
-                    rightAnswerPercent += 1
-                case 50..<66.7:
-                    firstWrongAnswerPercent += 1
-                case 66.7..<83.4:
-                    secondWrongAnswerPercent += 1
-                case 83.4..<100:
-                    thirdWrongAnswerPercent += 1
-                default:
-                    break
-                }
-            } else {
-                switch(randomNumber) {
-                case 0..<70:
-                    rightAnswerPercent += 1
-                case 70..<80:
-                    firstWrongAnswerPercent += 1
-                case 80..<90:
-                    secondWrongAnswerPercent += 1
-                case 90..<100:
-                    thirdWrongAnswerPercent += 1
-                default:
-                    break
-                }
+            switch(randomNumber) {
+            case 0..<firstCase:
+                rightAnswerPercent += 1
+            case firstCase..<secondCase:
+                firstWrongAnswerPercent += 1
+            case secondCase..<thirdCase:
+                secondWrongAnswerPercent += 1
+            case thirdCase..<100:
+                thirdWrongAnswerPercent += 1
+            default:
+                break
             }
             
         }
