@@ -14,7 +14,6 @@ class StartGameVC: UIViewController {
     var promt: Bool = false
     
     private var questionBrain = QuestionBrain()
-    
     // mainStackView
     private let generalStackView: GeneralStackView = {
         let stack = GeneralStackView(frame: .zero)
@@ -24,12 +23,9 @@ class StartGameVC: UIViewController {
     private let backgroundView: Background = {
         return Background(frame: .zero)
     }()
-    
     // AudioPlayer
     private var player: AVAudioPlayer?
-    
     // Timer
-    
     private var timer: Timer?
     private var count = 30
     
@@ -41,10 +37,7 @@ class StartGameVC: UIViewController {
         startTimer()
         updateUI()
         generalStackView.promtStackView.promtFour.isEnabled = false
-        
     }
-    
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -77,64 +70,41 @@ extension StartGameVC {
     // MARK: BUTTON TAPPED
     @objc func buttonAnswer(sender: UIButton) {
         
-        guard let title = sender.titleLabel,
-              let answerUser = title.text else { return }
+        guard let title = sender.titleLabel, let answerUser = title.text else { return }
         
-        let vc = QuestionsViewController()
-        vc.modalPresentationStyle = .fullScreen
-        vc.wonMoney = questionBrain.savedMoneyCheck() // Несгораемая сумма
-        
-        generalStackView.unubledButtons(trueFalse: false)
+        let questionsVC = QuestionsViewController()
+        questionsVC.modalPresentationStyle = .fullScreen
+        questionsVC.wonMoney = questionBrain.savedMoneyCheck()
         
         // MARK: Проверка на пустую кнопку
         if answerUser != " " {
             if promt {
                 checkVersion(button: sender, color: BackgroundColors.red.rawValue)
-                generalStackView.unubledButtons(trueFalse: true)
+                generalStackView.enableButtons(trueFalse: true)
                 promt = false
                 
             } else {
                 
                 let currentQuestion = questionBrain.questionNumber + 1
-                count = 30
-                player?.stop()
-                timer?.invalidate()
-                playSound("Ответ принят")
-                vc.currentQuestion = currentQuestion
-                checkVersion(button: sender, color: BackgroundColors.yellow.rawValue)
+                let answerResponse = checkAnswer(trueOrFalse: questionBrain.checkAnswer(answer: answerUser))
+                
+                questionsVC.currentQuestion = currentQuestion
+                answerTappedPreparation(sender: sender)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in // 5
-                    if questionBrain.checkAnswer(answer: answerUser) {
-                        vc.trueOrFalse = true
-                        checkVersion(button: sender, color: BackgroundColors.green.rawValue)
-                    } else {
-                        vc.trueOrFalse = false
-                        checkVersion(button: sender, color: BackgroundColors.red.rawValue)
-                    }
                     
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in // 1
-                        present(vc, animated: true)
-                        
-                        if vc.trueOrFalse && currentQuestion != 15 {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in // 3
-                                correctAnswerTapped(button: sender)
-                                generalStackView.promtStackView.promtFour.isEnabled = true
-                                dismiss(animated: true)
-                            }
-                        } else if vc.trueOrFalse && currentQuestion == 15 {
-                            //correctAnswerTapped(button: sender)
-                        }
-                        checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
-                        generalStackView.unubledButtons(trueFalse: true)
-                    }
+                    questionsVC.trueOrFalse = answerResponse.trueFalse
+                    checkVersion(button: sender, color: answerResponse.color)
+                    
+                    answerRightAction(sender: sender, controller: questionsVC,
+                                      trueFalse: questionsVC.trueOrFalse, question: currentQuestion)
                 }
             }
         }
-    
+        
     }
     
     @objc private func updateUI() {
-        
         let textButton = questionBrain.getQuestionTextButton()
         generalStackView.questionStackView.questionLabel.text = questionBrain.getQuestionText()
         generalStackView.moneyStackView.questionCountLabel.text = "Вопрос \(questionBrain.questionNumber + 1)"
@@ -153,11 +123,9 @@ extension StartGameVC {
             generalStackView.answerStackView.buttonThree.setBackgroundImage(UIImage(named: "blue"), for: .normal)
             generalStackView.answerStackView.buttonFour.setBackgroundImage(UIImage(named: "blue"), for: .normal)
         }
-        
     }
     
     @objc private func updateTimer() {
-        
         if count > 0 {
             count -= 1
             generalStackView.setTextForCountLabel(text: "\(count)")
@@ -174,6 +142,48 @@ extension StartGameVC {
 
 // MARK: - ADDING StartGameVC METHODS
 extension StartGameVC {
+    
+    private func checkAnswer(trueOrFalse: Bool) -> (trueFalse: Bool, color: String) {
+        
+        switch trueOrFalse {
+        case true:
+            return (true, BackgroundColors.green.rawValue)
+        case false:
+            return (false, BackgroundColors.red.rawValue)
+        }
+        
+    }
+    
+    private func answerTappedPreparation(sender: UIButton) {
+        generalStackView.enableButtons(trueFalse: false)
+        generalStackView.enablePromts(trueFalse: false)
+        count = 30
+        player?.stop()
+        timer?.invalidate()
+        playSound("Ответ принят")
+        checkVersion(button: sender, color: BackgroundColors.yellow.rawValue)
+    }
+    
+    private func answerRightAction(sender: UIButton, controller: UIViewController, trueFalse: Bool, question: Int) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in // 1
+            present(controller, animated: true)
+            
+            if trueFalse && question < 15 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in // 3
+                    correctAnswerTapped(button: sender)
+                    generalStackView.promtStackView.promtFour.isEnabled = true
+                    dismiss(animated: true)
+                }
+            } else if trueFalse && question == 15 {
+                correctAnswerTapped(button: sender)
+            }
+            checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
+            generalStackView.enableButtons(trueFalse: true)
+            generalStackView.enablePromts(trueFalse: true)
+        }
+        
+    }
     
     private func askTheAudience() {
         
@@ -202,15 +212,12 @@ extension StartGameVC {
     }
     
     private func calculatePercentage(element: Int) -> Float {
-        
         let percentage = Float(element) / 100
-        
         return percentage
     }
     
     
     private func setConstraintsForAskView(askView: UIView) {
-        
         NSLayoutConstraint.activate([
             askView.heightAnchor.constraint(equalToConstant: 300),
             askView.widthAnchor.constraint(equalToConstant: 300),
@@ -221,20 +228,17 @@ extension StartGameVC {
     }
     
     private func rightToMakeMistakes(sender: UIButton) {
-        
         promt = true
         generalStackView.promtStackView.promtThree.isEnabled = false
         sender.setBackgroundImage(UIImage(named: "promtMistakeUsed"), for: .normal)
     }
     
     private func takeMoney() {
-        
         let money = questionBrain.savedMoneyCheck()
         let vc = FinalViewController()
         vc.modalPresentationStyle = .fullScreen
         vc.takenMoney(money: money)
         self.present(vc, animated: true)
-        
     }
     
     private func buttonDidNotPressed() {
@@ -277,7 +281,6 @@ extension StartGameVC {
     
     // MARK: - For Button Set Title
     private func setTitleButton(textButton: [String]) {
-        
         generalStackView.answerStackView.buttonOne.setTitle(textButton[0], for: .normal)
         generalStackView.answerStackView.buttonTwo.setTitle(textButton[1], for: .normal)
         generalStackView.answerStackView.buttonThree.setTitle(textButton[2], for: .normal)
@@ -286,7 +289,6 @@ extension StartGameVC {
     
     // MARK: - START TIMER
     private func startTimer() {
-        
         playSound("zvuk-chasov")
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         generalStackView.setTextForCountLabel(text: count.description)

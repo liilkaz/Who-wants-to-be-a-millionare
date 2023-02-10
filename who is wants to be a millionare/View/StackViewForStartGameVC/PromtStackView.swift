@@ -39,9 +39,15 @@ class PromtStackView: UIStackView {
         settingConstraints()
     }
     
+    func enablePromts(trueFalse: Bool) {
+        promtOne.isUserInteractionEnabled = trueFalse
+        promtTwo.isUserInteractionEnabled = trueFalse
+        promtThree.isUserInteractionEnabled = trueFalse
+        promtFour.isUserInteractionEnabled = trueFalse
+    }
+    
     // MARK: addArrangedAllSubview
     private func addArrangedAllSubview() {
-        
         addArrangedSubview(promtOne)
         addArrangedSubview(promtTwo)
         addArrangedSubview(promtThree)
@@ -50,7 +56,6 @@ class PromtStackView: UIStackView {
     
     // MARK: settingConstraints
     private func settingConstraints() {
-        
         // For all Button
         NSLayoutConstraint.activate([
             promtOne.heightAnchor.constraint(equalToConstant: buttomHeight)
@@ -58,7 +63,6 @@ class PromtStackView: UIStackView {
     }
     
     private func settingButton(imageName: String, tag: Int) -> UIButton {
-        
         let button = UIButton()
         let image = UIImage(named: imageName)
         button.tag = tag

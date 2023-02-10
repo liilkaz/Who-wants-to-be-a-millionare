@@ -67,7 +67,7 @@ extension FinalViewController {
     }
     
     func takenMoney(money: Int) {
-        titleLabel.text = "Вы выиграли \(money)"
+        titleLabel.text = "Вы выиграли \(money) ₽"
     }
     
     func loseScreen() {
@@ -75,7 +75,7 @@ extension FinalViewController {
     }
     
     func winScreen() {
-        titleLabel.text = "Поздравляем! Вы выиграли 1,000,000!"
+        titleLabel.text = "Поздравляем! Вы выиграли 1,000,000 ₽!"
         let goldenImageView: UIImageView = {
             let image = UIImageView()
             image.translatesAutoresizingMaskIntoConstraints = false

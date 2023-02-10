@@ -20,12 +20,10 @@ class AnswerStackView: UIStackView {
     }()
     
     lazy var buttonThree: UIButton = {
-        
         return settingButton(title: "Vasya", imageName: "c.circle")
     }()
     
     lazy var buttonFour: UIButton = {
-        
         return settingButton(title: "Vasya", imageName: "d.circle")
     }()
     
@@ -44,7 +42,6 @@ class AnswerStackView: UIStackView {
     
     // MARK: addArrangedAllSubview
     private func addArrangedAllSubview() {
-        
         addArrangedSubview(buttonOne)
         addArrangedSubview(buttonTwo)
         addArrangedSubview(buttonThree)
@@ -53,7 +50,6 @@ class AnswerStackView: UIStackView {
     
     // MARK: settingConstraints
     private func settingConstraints() {
-        
         // For all Button
         NSLayoutConstraint.activate([
             buttonOne.heightAnchor.constraint(equalToConstant: buttonHeight)

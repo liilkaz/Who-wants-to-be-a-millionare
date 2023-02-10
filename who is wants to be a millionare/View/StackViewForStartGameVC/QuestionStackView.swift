@@ -37,12 +37,10 @@ class QuestionStackView: UIStackView {
         
         addArrangedAllSubview()
         settingConstraints()
-        
     }
     
     // MARK: addArrangedAllSubview
     private func addArrangedAllSubview() {
-        
         addArrangedSubview(iconImage)
         addArrangedSubview(questionLabel)
     }

@@ -41,7 +41,6 @@ class GeneralStackView: UIStackView {
     
     // MARK: addArrangedAllSubview
     private func addArrangedAllSubview() {
-        
         addArrangedSubview(questionStackView)
         addArrangedSubview(moneyStackView)
         addArrangedSubview(answerStackView)
@@ -49,12 +48,15 @@ class GeneralStackView: UIStackView {
     }
     
     func setTextForCountLabel(text: String) {
-        
         moneyStackView.setTextForCountLabel(text: text)
     }
     
-    func unubledButtons(trueFalse: Bool) {
+    func enableButtons(trueFalse: Bool) {
         answerStackView.unableButtons(trueFalse: trueFalse)
+    }
+    
+    func enablePromts(trueFalse: Bool) {
+        promtStackView.enablePromts(trueFalse: trueFalse)
     }
     
     required init(coder: NSCoder) {

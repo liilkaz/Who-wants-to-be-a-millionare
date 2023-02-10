@@ -33,14 +33,12 @@ class MoneyStackView: UIStackView {
     
     // MARK: addArrangedAllSubview
     private func addArrangedAllSubview() {
-        
         addArrangedSubview(questionCountLabel)
         addArrangedSubview(timerCountLabel)
         addArrangedSubview(moneyCountLabel)
     }
     
     func settingLabel(text: String, size: CGFloat, alignment: NSTextAlignment) -> UILabel {
-        
         let label = UILabel()
         label.text = text
         label.textAlignment = alignment
