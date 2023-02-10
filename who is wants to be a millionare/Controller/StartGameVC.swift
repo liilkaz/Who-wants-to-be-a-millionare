@@ -58,7 +58,7 @@ extension StartGameVC {
         case 1:
             promtFiftyFifty(sender: sender)
         case 2:
-            print("Two")
+            askTheAudience()
         case 3:
             print("Three")
         case 4:
@@ -66,6 +66,33 @@ extension StartGameVC {
         default:
             print("Error")
         }
+    }
+    
+    private func askTheAudience() {
+       
+        let view = ViewAsk(frame: .zero)
+        self.view.addSubview(view)
+        setConstraintsForAskView(askView: view)
+        let arrayAsk = questionBrain.askTheAudienceResult()
+        view.labelA.text = "A: \(arrayAsk[0]) %"
+        view.labelB.text = "B: \(arrayAsk[1]) %"
+        view.labelC.text = "C: \(arrayAsk[2]) %"
+        view.labelD.text = "D: \(arrayAsk[3]) %"
+        
+        generalStackView.promtStackView.promtTwo.isEnabled = false
+        generalStackView.promtStackView.promtTwo.setBackgroundImage(UIImage(named: "button2Used"), for: .normal)
+
+    }
+    
+    func setConstraintsForAskView(askView: UIView) {
+        
+        NSLayoutConstraint.activate([
+            askView.heightAnchor.constraint(equalToConstant: 300),
+            askView.widthAnchor.constraint(equalToConstant: 300),
+            askView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            askView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+        
     }
     
     private func takeMoney() {
