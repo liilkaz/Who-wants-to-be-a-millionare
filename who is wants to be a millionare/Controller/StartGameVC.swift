@@ -50,23 +50,6 @@ class StartGameVC: UIViewController {
 // MARK: - ADDING OBJC ACTIONS
 extension StartGameVC {
     
-    @objc func promtButton(sender: UIButton) {
-        
-        switch sender.tag {
-        case 1:
-            promtFiftyFifty(sender: sender)
-        case 2:
-            askTheAudience()
-        case 3:
-            rightToMakeMistakes(sender: sender)
-        case 4:
-            takeMoney()
-        default:
-            print("Error")
-        }
-    }
-    
-    
     // MARK: BUTTON TAPPED
     @objc func buttonAnswer(sender: UIButton) {
         
@@ -122,6 +105,22 @@ extension StartGameVC {
             generalStackView.answerStackView.buttonTwo.setBackgroundImage(UIImage(named: "blue"), for: .normal)
             generalStackView.answerStackView.buttonThree.setBackgroundImage(UIImage(named: "blue"), for: .normal)
             generalStackView.answerStackView.buttonFour.setBackgroundImage(UIImage(named: "blue"), for: .normal)
+        }
+    }
+    
+    @objc func promtButton(sender: UIButton) {
+        
+        switch sender.tag {
+        case 1:
+            promtFiftyFifty(sender: sender)
+        case 2:
+            askTheAudience()
+        case 3:
+            rightToMakeMistakes(sender: sender)
+        case 4:
+            takeMoney()
+        default:
+            print("Error")
         }
     }
     

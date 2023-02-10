@@ -44,9 +44,9 @@ struct QuestionListBrain {
     
     func checkSavedMoney(currentQuestion: Int) -> Int {
         switch currentQuestion {
-        case 5...9:
+        case 6...10:
             return 1000
-        case 10...14:
+        case 11...14:
             return 32000
         case 15:
             return 1000000
