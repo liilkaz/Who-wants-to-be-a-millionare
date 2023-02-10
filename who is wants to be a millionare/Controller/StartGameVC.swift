@@ -83,35 +83,37 @@ extension StartGameVC {
         
         // MARK: Проверка на пустую кнопку
         if answerUser != " " {
-            
-            self.count = 30
+            let currentQuestion = questionBrain.questionNumber + 1
+            count = 30
             player?.stop()
             timer?.invalidate()
             playSound("Ответ принят")
-            vc.currentQuestion = questionBrain.questionNumber + 1
+            vc.currentQuestion = currentQuestion
             checkVersion(button: sender, color: BackgroundColors.yellow.rawValue)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in // 5
                 if questionBrain.checkAnswer(answer: answerUser) {
                     vc.trueOrFalse = true
-                    self.checkVersion(button: sender, color: BackgroundColors.green.rawValue)
+                    checkVersion(button: sender, color: BackgroundColors.green.rawValue)
                 } else {
                     vc.trueOrFalse = false
                     checkVersion(button: sender, color: BackgroundColors.red.rawValue)
                 }
-                player?.stop()
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // 1
-                    self.present(vc, animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in // 1
+                    present(vc, animated: true)
                     
-                    if vc.trueOrFalse {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { // 3
-                            self.correctAnswerTapped(button: sender)
-                            self.generalStackView.promtStackView.promtFour.isEnabled = true
+                    if vc.trueOrFalse && currentQuestion != 15 {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in // 3
+                            correctAnswerTapped(button: sender)
+                            generalStackView.promtStackView.promtFour.isEnabled = true
+                            dismiss(animated: true)
                         }
+                    } else if vc.trueOrFalse && currentQuestion == 15 {
+                        //correctAnswerTapped(button: sender)
                     }
-                    self.checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
-                    self.generalStackView.unubledButtons(trueFalse: true)
+                    checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
+                    generalStackView.unubledButtons(trueFalse: true)
                 }
                 
             }
@@ -199,7 +201,7 @@ extension StartGameVC {
     private func takeMoney() {
         
         let money = questionBrain.savedMoneyCheck()
-        let vc = LoseViewController()
+        let vc = FinalViewController()
         vc.modalPresentationStyle = .fullScreen
         vc.takenMoney(money: money)
         self.present(vc, animated: true)
@@ -280,10 +282,9 @@ extension StartGameVC {
     
     // MARK: - ACTION IN CASE CORRECT ANSWER
     private func correctAnswerTapped(button: UIButton) {
-        self.questionBrain.nextQuestion()
-        self.timer?.invalidate()
-        self.startTimer()
-        self.dismiss(animated: true)
+        questionBrain.nextQuestion()
+        timer?.invalidate()
+        startTimer()
         
         Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.updateUI), userInfo: nil, repeats: false)
     }

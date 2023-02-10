@@ -1,5 +1,5 @@
 //
-//  LoseViewController.swift
+//  FinalViewController.swift
 //  who is wants to be a millionare
 //
 //  Created by Нахид Гаджалиев on 09.02.2023.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class LoseViewController: UIViewController {
+class FinalViewController: UIViewController {
     
     private let backgroundView = Background(frame: .zero)
-    var loseBrain = LoseScreenBrain()
+    var finalBrain = FinalScreenBrain()
     var wonMoney = 0
     
     private let logoView: UIImageView = {
@@ -55,12 +55,11 @@ class LoseViewController: UIViewController {
 
         viewUpdate()
         setupConstraints()
-        titleUpdate()
     }
     
 }
 
-extension LoseViewController {
+extension FinalViewController {
     
     private func viewUpdate() {
         view.addSubview(backgroundView)
@@ -71,12 +70,27 @@ extension LoseViewController {
         titleLabel.text = "Вы выиграли \(money)"
     }
     
-    private func titleUpdate() {
-        if loseBrain.checkWonMoney(money: wonMoney) {
-            titleLabel.text = "Вы выиграли \(wonMoney)"
-        } else {
-            titleLabel.text = "Вы проиграли"
-        }
+    func loseScreen() {
+        titleLabel.text = "Вы проиграли"
+    }
+    
+    func winScreen() {
+        titleLabel.text = "Поздравляем! Вы выиграли 1,000,000!"
+        let goldenImageView: UIImageView = {
+            let image = UIImageView()
+            image.translatesAutoresizingMaskIntoConstraints = false
+            image.image = UIImage(named: "image2")
+            image.contentMode = .scaleAspectFit
+            return image
+        }()
+        
+        backgroundView.addSubview(goldenImageView)
+        
+        NSLayoutConstraint.activate([
+            goldenImageView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor),
+            goldenImageView.rightAnchor.constraint(equalTo: backgroundView.rightAnchor),
+            goldenImageView.leftAnchor.constraint(equalTo: backgroundView.leftAnchor),
+        ])
     }
     
     private func setupConstraints() {
