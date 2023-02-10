@@ -20,7 +20,7 @@ class PromtStackView: UIStackView {
     }()
     
     lazy var promtThree: UIButton = {
-        return settingButton(imageName: "button3", tag: 3)
+        return settingButton(imageName: "promtMistake", tag: 3)
     }()
     
     lazy var promtFour: UIButton = {

@@ -10,6 +10,9 @@ import AVFoundation
 
 class StartGameVC: UIViewController {
     
+    // Flag For button promtMistake
+    var promt: Bool = false
+    
     private var questionBrain = QuestionBrain()
     
     // mainStackView
@@ -62,7 +65,7 @@ extension StartGameVC {
         case 2:
             askTheAudience()
         case 3:
-            print("Three")
+            rightToMakeMistakes(sender: sender)
         case 4:
             takeMoney()
         default:
@@ -85,43 +88,49 @@ extension StartGameVC {
         
         // MARK: Проверка на пустую кнопку
         if answerUser != " " {
-            let currentQuestion = questionBrain.questionNumber + 1
-            count = 30
-            player?.stop()
-            timer?.invalidate()
-            playSound("Ответ принят")
-            vc.currentQuestion = currentQuestion
-            checkVersion(button: sender, color: BackgroundColors.yellow.rawValue)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in // 5
-                if questionBrain.checkAnswer(answer: answerUser) {
-                    vc.trueOrFalse = true
-                    checkVersion(button: sender, color: BackgroundColors.green.rawValue)
-                } else {
-                    vc.trueOrFalse = false
-                    checkVersion(button: sender, color: BackgroundColors.red.rawValue)
-                }
+            if promt {
+                checkVersion(button: sender, color: BackgroundColors.red.rawValue)
+                generalStackView.unubledButtons(trueFalse: true)
+                promt = false
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in // 1
-                    present(vc, animated: true)
-                    
-                    if vc.trueOrFalse && currentQuestion != 15 {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in // 3
-                            correctAnswerTapped(button: sender)
-                            generalStackView.promtStackView.promtFour.isEnabled = true
-                            dismiss(animated: true)
-                        }
-                    } else if vc.trueOrFalse && currentQuestion == 15 {
-                        //correctAnswerTapped(button: sender)
+            } else {
+                
+                let currentQuestion = questionBrain.questionNumber + 1
+                count = 30
+                player?.stop()
+                timer?.invalidate()
+                playSound("Ответ принят")
+                vc.currentQuestion = currentQuestion
+                checkVersion(button: sender, color: BackgroundColors.yellow.rawValue)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in // 5
+                    if questionBrain.checkAnswer(answer: answerUser) {
+                        vc.trueOrFalse = true
+                        checkVersion(button: sender, color: BackgroundColors.green.rawValue)
+                    } else {
+                        vc.trueOrFalse = false
+                        checkVersion(button: sender, color: BackgroundColors.red.rawValue)
                     }
-                    checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
-                    generalStackView.unubledButtons(trueFalse: true)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in // 1
+                        present(vc, animated: true)
+                        
+                        if vc.trueOrFalse && currentQuestion != 15 {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in // 3
+                                correctAnswerTapped(button: sender)
+                                generalStackView.promtStackView.promtFour.isEnabled = true
+                                dismiss(animated: true)
+                            }
+                        } else if vc.trueOrFalse && currentQuestion == 15 {
+                            //correctAnswerTapped(button: sender)
+                        }
+                        checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
+                        generalStackView.unubledButtons(trueFalse: true)
+                    }
                 }
-                
             }
-            
         }
-        
+    
     }
     
     @objc private func updateUI() {
@@ -173,7 +182,7 @@ extension StartGameVC {
         setConstraintsForAskView(askView: view)
         self.backgroundView.layer.opacity = 0.5
         view.delegate = self
-
+        
         let arrayAsk = questionBrain.askTheAudienceResult()
         view.labelA.text = "A: \(arrayAsk[0]) %"
         view.answerAPercent.progress = calculatePercentage(element: arrayAsk[0])
@@ -209,6 +218,13 @@ extension StartGameVC {
             askView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
         
+    }
+    
+    private func rightToMakeMistakes(sender: UIButton) {
+        
+        promt = true
+        generalStackView.promtStackView.promtThree.isEnabled = false
+        sender.setBackgroundImage(UIImage(named: "promtMistakeUsed"), for: .normal)
     }
     
     private func takeMoney() {
