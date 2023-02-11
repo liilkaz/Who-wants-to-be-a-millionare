@@ -68,20 +68,20 @@ extension StartGameVC {
             
             if promt {
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in // 5
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in // 5
                     
                     questionsVC.trueOrFalse = answerResponse.trueFalse
-                    checkVersion(button: sender, color: answerResponse.color)
+                    self?.checkVersion(button: sender, color: answerResponse.color)
                     
                     switch questionsVC.trueOrFalse {
                     case true:
-                        answerRightAction(sender: sender, controller: questionsVC,
+                        self?.answerRightAction(sender: sender, controller: questionsVC,
                                           trueFalse: questionsVC.trueOrFalse, question: currentQuestion)
                     case false:
-                        playSound("zvuk-chasov")
-                        startTimer()
-                        generalStackView.enableButtons(trueFalse: true)
-                        generalStackView.enablePromts(trueFalse: true)
+                        self?.playSound("zvuk-chasov")
+                        self?.startTimer()
+                        self?.generalStackView.enableButtons(trueFalse: true)
+                        self?.generalStackView.enablePromts(trueFalse: true)
                     }
                 }
                 
@@ -89,12 +89,12 @@ extension StartGameVC {
                 
             } else {
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in // 5
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in // 5
                     
                     questionsVC.trueOrFalse = answerResponse.trueFalse
-                    checkVersion(button: sender, color: answerResponse.color)
+                    self?.checkVersion(button: sender, color: answerResponse.color)
                     
-                    answerRightAction(sender: sender, controller: questionsVC,
+                    self?.answerRightAction(sender: sender, controller: questionsVC,
                                       trueFalse: questionsVC.trueOrFalse, question: currentQuestion)
                 }
             }
@@ -180,21 +180,21 @@ extension StartGameVC {
     
     private func answerRightAction(sender: UIButton, controller: UIViewController, trueFalse: Bool, question: Int) {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in // 1
-            present(controller, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in // 1
+            self?.present(controller, animated: true)
             
             if trueFalse && question < 15 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in // 3
-                    correctAnswerTapped(button: sender)
-                    generalStackView.promtStackView.promtFour.isEnabled = true
-                    dismiss(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { // 3
+                    self?.correctAnswerTapped(button: sender)
+                    self?.generalStackView.promtStackView.promtFour.isEnabled = true
+                    self?.dismiss(animated: true)
                 }
             } else if trueFalse && question == 15 {
-                correctAnswerTapped(button: sender)
+                self?.correctAnswerTapped(button: sender)
             }
-            checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
-            generalStackView.enableButtons(trueFalse: true)
-            generalStackView.enablePromts(trueFalse: true)
+            self?.checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
+            self?.generalStackView.enableButtons(trueFalse: true)
+            self?.generalStackView.enablePromts(trueFalse: true)
         }
         
     }
@@ -317,6 +317,7 @@ extension StartGameVC {
         do {
             player = try AVAudioPlayer(contentsOf: url)
             guard let player = player else { return }
+            player.prepareToPlay()
             player.play()
             
         } catch let error {
