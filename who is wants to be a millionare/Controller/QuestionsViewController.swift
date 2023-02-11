@@ -48,6 +48,11 @@ class QuestionsViewController: UIViewController {
         creatingLoseOrWinView()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
+    
 }
 
 // MARK: - Adding QuestionsViewController methods

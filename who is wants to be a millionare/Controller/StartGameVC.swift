@@ -76,7 +76,7 @@ extension StartGameVC {
                     switch questionsVC.trueOrFalse {
                     case true:
                         self?.answerRightAction(sender: sender, controller: questionsVC,
-                                          trueFalse: questionsVC.trueOrFalse, question: currentQuestion)
+                                          trueFalse: questionsVC.trueOrFalse, question: currentQuestion, color: answerResponse.color)
                     case false:
                         self?.playSound("zvuk-chasov")
                         self?.startTimer()
@@ -92,12 +92,12 @@ extension StartGameVC {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in // 5
                     
                     questionsVC.trueOrFalse = answerResponse.trueFalse
-                    self?.checkVersion(button: sender, color: answerResponse.color)
                     
                     self?.answerRightAction(sender: sender, controller: questionsVC,
-                                      trueFalse: questionsVC.trueOrFalse, question: currentQuestion)
+                                            trueFalse: questionsVC.trueOrFalse, question: currentQuestion, color: answerResponse.color)
                 }
             }
+
         }
         
     }
@@ -154,19 +154,8 @@ extension StartGameVC {
     
 }
 
-// MARK: - ADDING StartGameVC METHODS
+// MARK: - BUTTON ACTIONS
 extension StartGameVC {
-    
-    private func checkAnswer(trueOrFalse: Bool) -> (trueFalse: Bool, color: String) {
-        
-        switch trueOrFalse {
-        case true:
-            return (true, BackgroundColors.green.rawValue)
-        case false:
-            return (false, BackgroundColors.red.rawValue)
-        }
-        
-    }
     
     private func answerTappedPreparation(sender: UIButton) {
         generalStackView.enableButtons(trueFalse: false)
@@ -178,23 +167,61 @@ extension StartGameVC {
         checkVersion(button: sender, color: BackgroundColors.yellow.rawValue)
     }
     
-    private func answerRightAction(sender: UIButton, controller: UIViewController, trueFalse: Bool, question: Int) {
+    private func answerRightAction(sender: UIButton, controller: UIViewController, trueFalse: Bool, question: Int, color: String) {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in // 1
+            self?.checkVersion(button: sender, color: color)
             self?.present(controller, animated: true)
-            
             if trueFalse && question < 15 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) { // 3
+                    self?.checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
                     self?.correctAnswerTapped(button: sender)
                     self?.generalStackView.promtStackView.promtFour.isEnabled = true
+                    self?.generalStackView.enableButtons(trueFalse: true)
+                    self?.generalStackView.enablePromts(trueFalse: true)
                     self?.dismiss(animated: true)
                 }
             } else if trueFalse && question == 15 {
                 self?.correctAnswerTapped(button: sender)
             }
-            self?.checkVersion(button: sender, color: BackgroundColors.blue.rawValue)
-            self?.generalStackView.enableButtons(trueFalse: true)
-            self?.generalStackView.enablePromts(trueFalse: true)
+
+        }
+        
+    }
+    
+    // MARK: - ACTION IN CASE CORRECT ANSWER
+    private func correctAnswerTapped(button: UIButton) {
+        questionBrain.nextQuestion()
+        timer?.invalidate()
+        startTimer()
+        
+        Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.updateUI), userInfo: nil, repeats: false)
+    }
+    
+    private func buttonDidNotPressed() {
+        let vc = QuestionsViewController()
+        vc.modalPresentationStyle = .fullScreen
+        vc.currentQuestion = questionBrain.questionNumber + 1
+        vc.trueOrFalse = false
+        player?.stop()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // 1
+            self.present(vc, animated: true)
+        }
+    }
+    
+}
+
+// MARK: - ADDING StartGameVC METHODS
+extension StartGameVC {
+    
+    private func checkAnswer(trueOrFalse: Bool) -> (trueFalse: Bool, color: String) {
+        
+        switch trueOrFalse {
+        case true:
+            return (true, BackgroundColors.green.rawValue)
+        case false:
+            return (false, BackgroundColors.red.rawValue)
         }
         
     }
@@ -255,18 +282,6 @@ extension StartGameVC {
         self.present(vc, animated: true)
     }
     
-    private func buttonDidNotPressed() {
-        let vc = QuestionsViewController()
-        vc.modalPresentationStyle = .fullScreen
-        vc.currentQuestion = questionBrain.questionNumber + 1
-        vc.trueOrFalse = false
-        player?.stop()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { // 1
-            self.present(vc, animated: true)
-        }
-    }
-    
     // MARK: - ADD All SUBVIEW
     private func addAllSubview() {
         view.addSubview(backgroundView)
@@ -323,15 +338,6 @@ extension StartGameVC {
         } catch let error {
             print(error.localizedDescription)
         }
-    }
-    
-    // MARK: - ACTION IN CASE CORRECT ANSWER
-    private func correctAnswerTapped(button: UIButton) {
-        questionBrain.nextQuestion()
-        timer?.invalidate()
-        startTimer()
-        
-        Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.updateUI), userInfo: nil, repeats: false)
     }
     
     // MARK: - CHECKING DEVICE VERSION
