@@ -29,10 +29,10 @@ class QuestionsViewController: UIViewController {
     }()
     
     lazy var stackView: UIStackView = {
-        let stack =  UIStackView(arrangedSubviews: [logoImage])
+        let stack =  UIStackView()
         stack.axis = .vertical
         stack.spacing = 10
-        
+        stack.distribution = .fillEqually
         return stack
     }()
     
@@ -44,7 +44,6 @@ class QuestionsViewController: UIViewController {
     
 }
 
-
 // MARK: - Adding QuestionsViewController methods
 
 extension QuestionsViewController {
@@ -52,6 +51,7 @@ extension QuestionsViewController {
     // MARK: - UPDATE FOR ELEMENTS
     private func viewUpdate() {
         view.addSubview(backgroundView)
+        view.addSubview(logoImage)
         view.addSubview(stackView)
         createImages()
         setupConstraints()
@@ -74,12 +74,6 @@ extension QuestionsViewController {
             stackView.addArrangedSubview(question)
             
             creatingLoseOrWinView()
-            
-            NSLayoutConstraint.activate([
-                question.heightAnchor.constraint(equalToConstant: 35),
-                question.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 15),
-                question.rightAnchor.constraint(equalTo: stackView.rightAnchor, constant: -15)
-            ])
         }
         
     }
@@ -145,18 +139,20 @@ extension QuestionsViewController {
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor),
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
-            stackView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+            stackView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            logoImage.topAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.topAnchor),
-            
+            logoImage.heightAnchor.constraint(lessThanOrEqualToConstant: 150),
+            logoImage.widthAnchor.constraint(lessThanOrEqualToConstant: 150),
+            logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            logoImage.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -10)
         ])
     }
     

@@ -14,6 +14,7 @@ class QuestionBackground: UIImageView {
         let label = UILabel()
         label.textColor = .systemBackground
         label.font = .systemFont(ofSize: 18)
+        label.textAlignment = .left
         
         return label
     }()
@@ -22,31 +23,37 @@ class QuestionBackground: UIImageView {
         let label = UILabel()
         label.textColor = .systemBackground
         label.font = .systemFont(ofSize: 18)
+        label.textAlignment = .right
         
         return label
+    }()
+    
+    lazy var stackLabel: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [questionNumberLabel, moneyLabel])
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        return stack
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentMode = .scaleToFill
-        translatesAutoresizingMaskIntoConstraints = false
-        addSubview(questionNumberLabel)
-        addSubview(moneyLabel)
+        addSubview(stackLabel)
         setupConstraints()
     }
     
     private func setupConstraints() {
         
-        questionNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        moneyLabel.translatesAutoresizingMaskIntoConstraints = false
+        stackLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            questionNumberLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20),
-            questionNumberLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            stackLabel.topAnchor.constraint(equalTo: topAnchor),
+            stackLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 10),
+            stackLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            stackLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
             
-            moneyLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -20),
-            moneyLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
         ])
     }
     
