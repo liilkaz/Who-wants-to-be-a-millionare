@@ -57,7 +57,6 @@ extension StartGameVC {
         
         let questionsVC = QuestionsViewController()
         questionsVC.modalPresentationStyle = .fullScreen
-        questionsVC.wonMoney = questionBrain.savedMoneyCheck()
         
         // MARK: Проверка на пустую кнопку
         if answerUser != " " {
@@ -71,7 +70,6 @@ extension StartGameVC {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in // 5
                     
                     questionsVC.trueOrFalse = answerResponse.trueFalse
-                    self?.checkVersion(button: sender, color: answerResponse.color)
                     
                     switch questionsVC.trueOrFalse {
                     case true:

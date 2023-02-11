@@ -34,7 +34,6 @@
 		D0E5956829950E7F0036B93C /* Неверный ответ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D0E5956729950E7F0036B93C /* Неверный ответ.mp3 */; };
 		D0E5956A29950E840036B93C /* Верный ответ.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D0E5956929950E840036B93C /* Верный ответ.mp3 */; };
 		D0E5956C29950ED20036B93C /* FinalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5956B29950ED20036B93C /* FinalViewController.swift */; };
-		D0E5956E29950EE50036B93C /* FinalScreenBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E5956D29950EE50036B93C /* FinalScreenBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,7 +66,6 @@
 		D0E5956729950E7F0036B93C /* Неверный ответ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Неверный ответ.mp3"; sourceTree = "<group>"; };
 		D0E5956929950E840036B93C /* Верный ответ.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Верный ответ.mp3"; sourceTree = "<group>"; };
 		D0E5956B29950ED20036B93C /* FinalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalViewController.swift; sourceTree = "<group>"; };
-		D0E5956D29950EE50036B93C /* FinalScreenBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScreenBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,8 +123,8 @@
 		751F5B1D29901EA3000F8A98 /* who is wants to be a millionare */ = {
 			isa = PBXGroup;
 			children = (
-				751F5B1E29901EA3000F8A98 /* AppDelegate.swift */,
-				751F5B2029901EA3000F8A98 /* SceneDelegate.swift */,
+				D0CBD61829984A21002C5002 /* AppDelegate */,
+				D0CBD61729984A13002C5002 /* SceneDelegate */,
 				D017EA262992CB4100731EA0 /* Model */,
 				751F5B3329901EFA000F8A98 /* View */,
 				751F5B3229901EEC000F8A98 /* Controller */,
@@ -156,8 +154,8 @@
 				7540356D2992652700F1011A /* MainScreen */,
 				525F3253299286240012B9B9 /* StackViewForStartGameVC */,
 				D017EA302992D54600731EA0 /* QuestionListScreen */,
-				751F5B2929901EA4000F8A98 /* LaunchScreen.storyboard */,
-				75403569299264C100F1011A /* Background.swift */,
+				D0CBD616299849DD002C5002 /* BackgroundImageView */,
+				D0CBD615299849CA002C5002 /* LaunchScreen */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,7 +174,6 @@
 				D00A52B52992E22C0084D763 /* QuestionModel.swift */,
 				D017EA2C2992D50400731EA0 /* QuestionBrain.swift */,
 				D017EA272992CB8500731EA0 /* QuestionListBrain.swift */,
-				D0E5956D29950EE50036B93C /* FinalScreenBrain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -195,6 +192,38 @@
 				D017EA312992D56300731EA0 /* QuestionBackground.swift */,
 			);
 			path = QuestionListScreen;
+			sourceTree = "<group>";
+		};
+		D0CBD615299849CA002C5002 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				751F5B2929901EA4000F8A98 /* LaunchScreen.storyboard */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		D0CBD616299849DD002C5002 /* BackgroundImageView */ = {
+			isa = PBXGroup;
+			children = (
+				75403569299264C100F1011A /* Background.swift */,
+			);
+			path = BackgroundImageView;
+			sourceTree = "<group>";
+		};
+		D0CBD61729984A13002C5002 /* SceneDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				751F5B2029901EA3000F8A98 /* SceneDelegate.swift */,
+			);
+			path = SceneDelegate;
+			sourceTree = "<group>";
+		};
+		D0CBD61829984A21002C5002 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				751F5B1E29901EA3000F8A98 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,7 +304,6 @@
 				D017EA2D2992D50400731EA0 /* QuestionBrain.swift in Sources */,
 				7540356C2992652200F1011A /* MainStackView.swift in Sources */,
 				52C75DDD29928A7300E80814 /* AnswerStackView.swift in Sources */,
-				D0E5956E29950EE50036B93C /* FinalScreenBrain.swift in Sources */,
 				D017EA282992CB8500731EA0 /* QuestionListBrain.swift in Sources */,
 				52EC8E8B29958F6600DA8E50 /* AudienceAskResultView.swift in Sources */,
 				525F32552992868F0012B9B9 /* StartGameVC.swift in Sources */,

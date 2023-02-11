@@ -13,7 +13,6 @@ class QuestionsViewController: UIViewController {
     private var questionListBrain = QuestionListBrain()
     var trueOrFalse = false
     var currentQuestion = 0
-    var wonMoney = 0
     private var player: AVAudioPlayer?
     
     // Creating background image
@@ -50,7 +49,7 @@ class QuestionsViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        player?.stop()
     }
     
 }
