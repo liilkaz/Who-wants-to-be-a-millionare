@@ -19,7 +19,7 @@ class MainStackView: UIStackView {
     
     let welcomeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Welcome"
+        label.text = "Добро пожаловать!"
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
