@@ -45,6 +45,7 @@ class FinalViewController: UIViewController {
         let stack = UIStackView(arrangedSubviews: [logoView, titleLabel, playAgainButton])
         stack.axis = .vertical
         stack.spacing = 20
+        stack.distribution = .fillProportionally
         stack.alignment = .center
         
         return stack
@@ -101,19 +102,18 @@ extension FinalViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            backgroundView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            backgroundView.rightAnchor.constraint(equalTo: view.rightAnchor),
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            verticalStack.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 15),
-            verticalStack.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -15),
-            verticalStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
-            verticalStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90),
+            verticalStack.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            verticalStack.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            verticalStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            verticalStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             playAgainButton.heightAnchor.constraint(equalToConstant: 50),
             
-            logoView.topAnchor.constraint(equalTo: verticalStack.safeAreaLayoutGuide.topAnchor),
             logoView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }

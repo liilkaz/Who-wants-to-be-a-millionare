@@ -42,6 +42,12 @@ class QuestionsViewController: UIViewController {
         viewUpdate()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        creatingLoseOrWinView()
+    }
+    
 }
 
 // MARK: - Adding QuestionsViewController methods
@@ -73,7 +79,6 @@ extension QuestionsViewController {
             
             stackView.addArrangedSubview(question)
             
-            creatingLoseOrWinView()
         }
         
     }
@@ -89,9 +94,9 @@ extension QuestionsViewController {
             if currentQuestion == 15 {
                 playSound("Выигрыш миллион")
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                     finalVC.winScreen()
-                    self.present(finalVC, animated: true)
+                    self?.present(finalVC, animated: true)
                 }
                 
             } else {
@@ -109,8 +114,8 @@ extension QuestionsViewController {
                 finalVC.takenMoney(money: questionListBrain.checkSavedMoney(currentQuestion: currentQuestion))
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
-                self.present(finalVC, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                self?.present(finalVC, animated: true)
             }
             
         }
