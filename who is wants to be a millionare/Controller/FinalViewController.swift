@@ -10,8 +10,6 @@ import UIKit
 class FinalViewController: UIViewController {
     
     private let backgroundView = Background(frame: .zero)
-    var finalBrain = FinalScreenBrain()
-    var wonMoney = 0
     
     private let logoView: UIImageView = {
         let image = UIImageView()

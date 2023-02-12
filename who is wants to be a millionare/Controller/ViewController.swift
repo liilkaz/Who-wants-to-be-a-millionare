@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         view.addSubview(stackView)
     }
     
-    func setConstraints(){
+    private func setConstraints(){
         NSLayoutConstraint.activate([
             background.topAnchor.constraint(equalTo: view.topAnchor),
             background.leadingAnchor.constraint(equalTo: view.leadingAnchor),
