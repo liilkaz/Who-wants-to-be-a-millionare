@@ -28,6 +28,7 @@
 		D017EA2D2992D50400731EA0 /* QuestionBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA2C2992D50400731EA0 /* QuestionBrain.swift */; };
 		D017EA322992D56300731EA0 /* QuestionBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA312992D56300731EA0 /* QuestionBackground.swift */; };
 		D017EA342992D61C00731EA0 /* QuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D017EA332992D61C00731EA0 /* QuestionsViewController.swift */; };
+		D04554D729992735000C39F7 /* Закончил игру.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D04554D629992735000C39F7 /* Закончил игру.mp3 */; };
 		D05915F42992C72100AEB917 /* zvuk-chasov.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */; };
 		D07B871D2996870D00E6D29C /* Выигрыш миллион.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D07B871C2996870D00E6D29C /* Выигрыш миллион.mp3 */; };
 		D0E5956629950E7A0036B93C /* Ответ принят.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D0E5956529950E7A0036B93C /* Ответ принят.mp3 */; };
@@ -60,6 +61,7 @@
 		D017EA2C2992D50400731EA0 /* QuestionBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBrain.swift; sourceTree = "<group>"; };
 		D017EA312992D56300731EA0 /* QuestionBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBackground.swift; sourceTree = "<group>"; };
 		D017EA332992D61C00731EA0 /* QuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsViewController.swift; sourceTree = "<group>"; };
+		D04554D629992735000C39F7 /* Закончил игру.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Закончил игру.mp3"; sourceTree = "<group>"; };
 		D05915F32992C72100AEB917 /* zvuk-chasov.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "zvuk-chasov.mp3"; sourceTree = "<group>"; };
 		D07B871C2996870D00E6D29C /* Выигрыш миллион.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Выигрыш миллион.mp3"; sourceTree = "<group>"; };
 		D0E5956529950E7A0036B93C /* Ответ принят.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ответ принят.mp3"; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				D0E5956529950E7A0036B93C /* Ответ принят.mp3 */,
+				D04554D629992735000C39F7 /* Закончил игру.mp3 */,
 				D07B871C2996870D00E6D29C /* Выигрыш миллион.mp3 */,
 				D0E5956929950E840036B93C /* Верный ответ.mp3 */,
 				D0E5956729950E7F0036B93C /* Неверный ответ.mp3 */,
@@ -287,6 +290,7 @@
 				D0E5956629950E7A0036B93C /* Ответ принят.mp3 in Resources */,
 				D07B871D2996870D00E6D29C /* Выигрыш миллион.mp3 in Resources */,
 				751F5B2B29901EA4000F8A98 /* LaunchScreen.storyboard in Resources */,
+				D04554D729992735000C39F7 /* Закончил игру.mp3 in Resources */,
 				751F5B2829901EA4000F8A98 /* Assets.xcassets in Resources */,
 				D0E5956829950E7F0036B93C /* Неверный ответ.mp3 in Resources */,
 				D05915F42992C72100AEB917 /* zvuk-chasov.mp3 in Resources */,

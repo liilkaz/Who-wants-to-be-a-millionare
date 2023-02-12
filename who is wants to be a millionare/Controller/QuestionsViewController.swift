@@ -35,13 +35,22 @@ class QuestionsViewController: UIViewController {
         return stack
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewUpdate()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewUpdate()
         creatingLoseOrWinView()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        player = nil
+    }
+
 }
 
 // MARK: - Adding QuestionsViewController methods
@@ -84,17 +93,14 @@ extension QuestionsViewController {
         
         switch trueOrFalse {
         case true:
-            
+            playSound("Верный ответ")
             if currentQuestion == 15 {
-                playSound("Выигрыш миллион")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                     finalVC.winScreen()
                     self?.present(finalVC, animated: true)
                 }
                 
-            } else {
-                playSound("Верный ответ")
             }
             
         case false:
