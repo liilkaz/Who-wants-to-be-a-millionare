@@ -76,6 +76,7 @@ extension StartGameVC {
                         self?.answerRightAction(sender: sender, controller: questionsVC,
                                           trueFalse: questionsVC.trueOrFalse, question: currentQuestion, color: answerResponse.color)
                     case false:
+                        self?.checkVersion(button: sender, color: BackgroundColors.red.rawValue)
                         self?.playSound("zvuk-chasov")
                         self?.startTimer()
                         self?.generalStackView.enableButtons(trueFalse: true)

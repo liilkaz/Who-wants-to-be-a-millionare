@@ -81,7 +81,9 @@ extension AnswerStackView {
             button.setBackgroundImage(UIImage(named: "blue"), for: .normal)
             button.setImage(UIImage(systemName: imageName), for: .normal)
             button.tintColor = .white
-            button.centerTextAndImage(spacing: 250)
+            button.imageView?.contentMode = .left
+            button.contentHorizontalAlignment = .left
+            button.centerTextAndImage(spacing: 100)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.addTarget(nil, action: #selector(StartGameVC.buttonAnswer(sender:)), for: .touchUpInside)
             return button

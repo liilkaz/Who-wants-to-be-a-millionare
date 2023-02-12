@@ -35,21 +35,11 @@ class QuestionsViewController: UIViewController {
         return stack
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        viewUpdate()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        viewUpdate()
         creatingLoseOrWinView()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        player?.stop()
     }
     
 }
