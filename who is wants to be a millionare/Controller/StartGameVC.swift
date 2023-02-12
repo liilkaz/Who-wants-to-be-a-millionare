@@ -29,6 +29,8 @@ class StartGameVC: UIViewController {
     private var timer: Timer?
     private var count = 30
     
+    var shapeLayer = CAShapeLayer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,19 +41,69 @@ class StartGameVC: UIViewController {
         generalStackView.promtStackView.promtFour.isEnabled = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        basicAnimtion()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        animationCircular()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         player?.stop()
         timer?.invalidate()
     }
     
+    // Animation
+    
+    func animationCircular() {
+        
+        let center = CGPoint(x:
+                                generalStackView.moneyStackView.shapeView.frame.width / 2, y:
+                                generalStackView.moneyStackView.shapeView.frame.height / 2)
+        
+        let endAngle = (-CGFloat.pi / 2)
+        let startAngle = 2 * CGFloat.pi + endAngle
+        let radius = CGFloat(generalStackView.moneyStackView.shapeView.frame.width + 25) / CGFloat.pi
+        
+        let circularPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: false)
+        
+        shapeLayer.path = circularPath.cgPath
+        shapeLayer.lineWidth = 10
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeEnd = 1
+        shapeLayer.lineCap = CAShapeLayerLineCap.round
+        shapeLayer.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+        generalStackView.moneyStackView.shapeView.layer.addSublayer(shapeLayer)
+    }
+    
+    func basicAnimtion() {
+        
+        let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        basicAnimation.toValue = 0
+        basicAnimation.duration = CFTimeInterval(count)
+        basicAnimation.fillMode = CAMediaTimingFillMode.forwards
+        basicAnimation.isRemovedOnCompletion = false
+        shapeLayer.add(basicAnimation, forKey: "basicAnimation")
+        
+    }
+    
 }
+
+
 
 // MARK: - ADDING OBJC ACTIONS
 extension StartGameVC {
     
     // MARK: BUTTON TAPPED
     @objc func buttonAnswer(sender: UIButton) {
+        
+        shapeLayer.removeAllAnimations()
         
         guard let title = sender.titleLabel, let answerUser = title.text else { return }
         
@@ -141,12 +193,14 @@ extension StartGameVC {
     @objc private func updateTimer() {
         if count > 0 {
             count -= 1
-            generalStackView.setTextForCountLabel(text: "\(count)")
+//            generalStackView.setTextForCountLabel(text: "\(count)")
+            generalStackView.moneyStackView.timerLabel.text = "\(count)"
         } else {
             buttonDidNotPressed()
             if let timer = timer {
                 timer.invalidate()
-                generalStackView.setTextForCountLabel(text: "\(count)")
+//                generalStackView.setTextForCountLabel(text: "\(count)")
+                generalStackView.moneyStackView.timerLabel.text = "\(count)"
             }
         }
     }
