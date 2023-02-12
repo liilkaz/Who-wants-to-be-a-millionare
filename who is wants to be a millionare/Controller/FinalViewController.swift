@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import AVFoundation
 
 class FinalViewController: UIViewController {
     
     private let backgroundView = Background(frame: .zero)
+    private var player: AVAudioPlayer?
     
     private let logoView: UIImageView = {
         let image = UIImageView()
@@ -55,6 +57,11 @@ class FinalViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        player = nil
+    }
+    
 }
 
 extension FinalViewController {
@@ -73,6 +80,7 @@ extension FinalViewController {
     }
     
     func winScreen() {
+        playSound("Выигрыш миллион")
         titleLabel.text = "Поздравляем! Вы выиграли 1,000,000 ₽!"
         let goldenImageView: UIImageView = {
             let image = UIImageView()
@@ -89,6 +97,21 @@ extension FinalViewController {
             goldenImageView.rightAnchor.constraint(equalTo: backgroundView.rightAnchor),
             goldenImageView.leftAnchor.constraint(equalTo: backgroundView.leftAnchor),
         ])
+    }
+    
+    // MARK: - PLAY SOUND
+    private func playSound(_ soundName: String) {
+        
+        guard let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") else { return }
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            guard let player = player else { return }
+            player.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     private func setupConstraints() {
