@@ -49,9 +49,8 @@ class FinalViewController: UIViewController {
         return stack
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         viewUpdate()
         setupConstraints()
     }
@@ -118,5 +117,6 @@ extension FinalViewController {
     
     @objc func turnToRootView() {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        
     }
 }

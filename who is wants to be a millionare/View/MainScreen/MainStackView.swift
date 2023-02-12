@@ -38,7 +38,8 @@ class MainStackView: UIStackView {
         let button = UIButton()
         button.setTitle("Правила игры", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 25)
-        button.setTitleColor( .green, for: .normal)
+        button.setTitleColor( .white, for: .normal)
+        button.setBackgroundImage(UIImage(named: "green"), for: .normal)
         button.addTarget(nil, action: #selector(ViewController.rulesButtonPressed),
             for: .touchUpInside)
         return button
@@ -48,7 +49,8 @@ class MainStackView: UIStackView {
         let button = UIButton()
         button.setTitle("Начало игры", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 25)
-        button.setTitleColor( .green, for: .normal)
+        button.setTitleColor( .white, for: .normal)
+        button.setBackgroundImage(UIImage(named: "green"), for: .normal)
         button.addTarget(nil, action: #selector(ViewController.buttonStartGamePressed), for: .touchUpInside)
         
         return button
@@ -61,8 +63,8 @@ class MainStackView: UIStackView {
         addArrangedSubview(image)
         addArrangedSubview(welcomeLabel)
         addArrangedSubview(labelText)
-        addArrangedSubview(rulesButton)
         addArrangedSubview(startButton)
+        addArrangedSubview(rulesButton)
         
         translatesAutoresizingMaskIntoConstraints = false
         axis = .vertical

@@ -14,7 +14,17 @@ struct QuestionBrain {
         Question(question: "Как называется острая мексиканская приправа?", answers: ["Сациви", "Пицца", "Чили", "Лечо"].shuffled(), correctAnswer: "Чили"),
         Question(question: "Какой вид транспорта, еще не имеет службы предварительного заказа билетов?", answers: ["Троллейбусный", "Морской", "Авиационный", "Железнодорожный"].shuffled(), correctAnswer: "Троллейбусный"),
         Question(question: "Какой вопрос, по определению, не требует ответа?", answers: ["Каверзный", "Философский", "Риторический", "Экзаменационный"].shuffled(), correctAnswer: "Риторический"),
-        Question(question: "Сколько стран входит в состав Великобритании?", answers: ["4", "3", "1", "6"].shuffled(), correctAnswer: "4")
+        Question(question: "Сколько стран входит в состав Великобритании?", answers: ["4", "3", "1", "6"].shuffled(), correctAnswer: "4"),
+        Question(question: "Угадайте мультфильм или персонажа по фразам. ,,Феноменально,,", answers: ["Звёздочкин", "Лосяш", "Знайка", "Незнайка"].shuffled(), correctAnswer: "Лосяш"),
+        Question(question: "Что никогда не вырастет на дереве?", answers: ["Груша", "Яблоко", "Арбуз", "Вишня"].shuffled(), correctAnswer: "Арбуз"),
+        Question(question: "Чтобы приготовить Колобок, старуха намела...", answers: ["Снега", "Листьев", "Сена", "Муки"].shuffled(), correctAnswer: "Муки"),
+        Question(question: "Какие колбаски существуют на самом деле?", answers: ["Коризо", "Моризо", "Форизо", "Чоризо"].shuffled(), correctAnswer: "Чоризо"),
+        Question(question: "Как звучит самое распространённое телефонное приветствие?", answers: ["Чао", "Гамарджоба", "Пронто", "Алло"].shuffled(), correctAnswer: "Алло"),
+        Question(question: "Какой европейский город прославился своими модными тенденциями?", answers: ["Манчестер", "Севилья", "Гамбург", "Милан"].shuffled(), correctAnswer: "Милан"),
+        Question(question: "Что даёт дерево сорта антоновка?", answers: ["Мандарины", "Апельсины", "Груши", "Яблоки"].shuffled(), correctAnswer: "Яблоки"),
+        Question(question: "Как называют человека, который очень много ест?", answers: ["Полиглот", "Дистрофик", "Кусочник", "Обжора"].shuffled(), correctAnswer: "Обжора"),
+        Question(question: "Один из самых богатых людей мира?", answers: ["Пушкин", "Н. Михалков", "Пугачёва", "Б. Гейтс"].shuffled(), correctAnswer: "Б. Гейтс"),
+        Question(question: "Какой общий ингредиент есть у эскимо и колбасы?", answers: ["Сахар", "Шоколад", "Молоко", "Все ответы верны"].shuffled(), correctAnswer: "Все ответы верны"),
     ].shuffled()
     
     private let mediumQuestions = [
@@ -27,6 +37,18 @@ struct QuestionBrain {
         Question(question: "Из чего, согласно поговорке не выкинешь слов?", answers: ["Конституции", "Песни", "Газет", "Молитвы"].shuffled(), correctAnswer: "Песни"),
         
         Question(question: "Так называются дополнения к основному сюжету игры.", answers: ["Сториап", "Апгрейд", "Скилл", "Аддон"].shuffled(), correctAnswer: "Аддон"),
+        
+        Question(question: "Кто живёт в Австралии?", answers: ["Злыдня", "Хитрюга", "Дюдюка Барбидокская", "Ехидна"].shuffled(), correctAnswer: "Ехидна"),
+        Question(question: "Название какого города переводится как Белый холм?", answers: ["Астана", "Кызыл орда", "Караганда", "Актобе"].shuffled(), correctAnswer: "Актобе"),
+        Question(question: "Как называлась деревня в которой жили дядя Фёдор, Матроскин и Шарик?", answers: ["Йогуртово", "Молочное", "Простофилино", "Простоквашино"].shuffled(), correctAnswer: "Простоквашино"),
+        Question(question: "Какую из этих аббревиатур на всю жизнь запомнят миллионы обманутых вкладчиков?", answers: ["АКМ", "КЛМ", "ДДТ", "МММ"].shuffled(), correctAnswer: "МММ"),
+        Question(question: "Как звали пушкинского Онегина?", answers: ["Александр", "Иван", "Михаил", "Евгений"].shuffled(), correctAnswer: "Евгений"),
+        Question(question: "Какое из этих женских имен в переводе с латинского означает ,,Победа,,?", answers: ["Олимпиада", "Ноябрина", "Капитолина", "Виктория"].shuffled(), correctAnswer: "Виктория"),
+        Question(question: "Какой витамин не содержится в дыне?", answers: ["P", "C", "A", "М"].shuffled(), correctAnswer: "М"),
+        Question(question: "Какое определение человеческого характера приписывают ослу?", answers: ["Упорный", "Уступчивый", "Усердный", "Упрямый"].shuffled(), correctAnswer: "Упрямый"),
+        Question(question: "Как часто называют молодого барашка?", answers: ["Кефирный", "Сливочный", "Шоколадный", "Молочный"].shuffled(), correctAnswer: "Молочный"),
+        Question(question: "Как звали доброго дедушку, спасшего зайчиков?", answers: ["Мамай", "Макар", "Масай", "Мазай"].shuffled(), correctAnswer: "Мазай")
+        
     ].shuffled()
     
     private let hardQuestions = [
@@ -39,14 +61,34 @@ struct QuestionBrain {
         Question(question: "Когда прошел год дельфина?", answers: ["2002", "2011", "1994", "2007"].shuffled(), correctAnswer: "2007"),
         
         Question(question: "Кличка основателя группы Коррозия металла", answers: ["Скелет", "Горшок", "Ручейник", "Паук"].shuffled(), correctAnswer: "Паук"),
+        Question(question: "Этот строительный материал НЕ входит в состав Пирамиды Хеопса.", answers: ["Базальт", "Гранит", "Известня", "Асбест"].shuffled(), correctAnswer: "Асбест"),
+        Question(question: "В каком году появился Дзержинский район?", answers: ["1935", "1932", "1934", "1933"].shuffled(), correctAnswer: "1933"),
+        Question(question: "Сколько весила самая маленькая собака?", answers: ["105 грамм", "113 грамм", "109 грамм", "102 грамма"].shuffled(), correctAnswer: "113 грамм"),
+        Question(question: "Какой металл обязательно присутствует в амальгаме?", answers: ["Свинец", "Серебро", "Ртуть", "Молоко"].shuffled(), correctAnswer: "Ртуть"),
+        Question(question: "Найдите название ягоды.", answers: ["Плмарикд", "Печаак", "Цичкао", "Уаибкклн"].shuffled(), correctAnswer: "Уаибкклн"),
+        Question(question: "Какой британский монах больше всех пробыл на троне?", answers: ["Елизавета I", "Ричард I", "Генрих VIII", "Виктория"].shuffled(), correctAnswer: "Виктория"),
+        Question(question: "Какую станцию украшают мозаичные панно художника А. Дайнеки?", answers: ["Таганскую", "Сокольники", "Китай-город", "Маяковскую"].shuffled(), correctAnswer: "Маяковскую"),
+        Question(question: "Что лишнее?", answers: ["Пироп", "Хризолит", "Аметист", "Флюорит"].shuffled(), correctAnswer: "Флюорит"),
+        Question(question: "Какая страна, использующая правостороннее движение на автомобильных дорогах, имеет левостороннее железнодорожное сообщение?", answers: ["США", "Китай", "Германия", "Франция"].shuffled(), correctAnswer: "Франция"),
+        Question(question: "Представители трёх поколений этой политической династии стали объектами терактов. Какой?", answers: ["Кеннеди", "Бхутто", "Рабин", "Ганди"].shuffled(), correctAnswer: "Ганди"),
     ].shuffled()
     
-    var questions: [Question]
+    var questions = [Question]()
     var moneyList = [100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000]
     var questionNumber = 0
     
     init() {
-        questions = easyQuestions + mediumQuestions + hardQuestions
+        
+        for index in 0...4 {
+            questions.append(easyQuestions[index])
+        }
+        for index in 0...4 {
+            questions.append(mediumQuestions[index])
+        }
+        for index in 0...4 {
+            questions.append(hardQuestions[index])
+        }
+
     }
     
     func saveMoneyButtonInteraction() -> Bool {
