@@ -13,8 +13,27 @@ class MoneyStackView: UIStackView {
         return settingLabel(text: "RUB", size: 20, alignment: .right)
     }()
     
-    lazy var timerCountLabel: UILabel = {
-        return settingLabel(text: "30", size: 70, alignment: .center)
+//    lazy var timerCountLabel: UILabel = {
+//        return settingLabel(text: "30", size: 70, alignment: .center)
+//    }()
+    
+    let shapeView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "imageCircular")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    let timerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "30"
+        label.font = .boldSystemFont(ofSize: 50)
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+        
     }()
     
     lazy var questionCountLabel: UILabel = {
@@ -28,13 +47,22 @@ class MoneyStackView: UIStackView {
         alignment = .fill
         distribution = .fillEqually
         
+        shapeView.addSubview(timerLabel)
+        
+        NSLayoutConstraint.activate([
+            timerLabel.centerXAnchor.constraint(equalTo: shapeView.centerXAnchor),
+            timerLabel.centerYAnchor.constraint(equalTo: shapeView.centerYAnchor),
+        ])
+        
+        
         addArrangedAllSubview()
     }
     
     // MARK: addArrangedAllSubview
     private func addArrangedAllSubview() {
         addArrangedSubview(questionCountLabel)
-        addArrangedSubview(timerCountLabel)
+//        addArrangedSubview(timerCountLabel)
+        addArrangedSubview(shapeView)
         addArrangedSubview(moneyCountLabel)
     }
     
@@ -49,7 +77,7 @@ class MoneyStackView: UIStackView {
     }
     
     func setTextForCountLabel(text: String) {
-        timerCountLabel.text = text
+//        timerCountLabel.text = text
     }
     
     required init(coder: NSCoder) {
